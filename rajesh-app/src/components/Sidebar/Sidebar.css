@@ -1,0 +1,96 @@
+p{
+    margin: 0px;
+}
+.sidebar {
+    background-color: #ffffff;
+    color: #fff;
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /* padding: 10px; */
+    border-right: 1px solid grey;
+    box-sizing: border-box;
+}
+
+.sidebar h1 {
+    font-size: 24px;
+    margin: 0;
+    color: #505887;
+}
+
+.top-section {
+    display: flex;
+    color: #505887;
+    height: 38px;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 21px;
+    
+}
+
+.middle-section a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    justify-content: flex-start;
+    display: block;
+    margin-bottom: 10px;
+    color: #505887;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.bottom-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.bottom-section{
+    /* width: 50px;
+    height: 50px; */
+    /* border-radius: 50%; */
+    height: 96px;
+    border-top:1px solid #EAECF0;
+    margin: 0px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 32px;
+    width: 240px;
+}
+.money{
+    color: #F89A23;
+    margin: 0px;
+    margin-left: 11px;
+}
+.matters{
+    color:#02969C;
+    margin: 0px;
+}
+.rhye{
+    color:#505887 ;
+    margin: 0px;
+}
+.rhye-email{
+    color: #718EBF;
+    margin: 0px;
+}
+.avatar-details{
+    height:40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+}
+.middle-details{
+    display:flex !important; 
+     justify-content:flex-start !important;
+     align-items:center !important;
+}
