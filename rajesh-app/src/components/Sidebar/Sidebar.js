@@ -9,24 +9,24 @@ import Avatar from '../Icons/Avatar.png'
 
 import './Sidebar.css'
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   return (
     <div>
-         <div class="sidebar">
-            <div class="top-section">
+         <div className="sidebar">
+            <div className="top-section">
             <AppLogo />
             <h3 className='money'>Money <span className='matters'>Matters</span></h3>
           
         </div>
-        <div class="middle-section" style={{flex:1}}>
+        <div className="middle-section" style={{flex:1}}>
             <div>
-            <a href="#" className='middle-details'> <HomeIcon style={{marginRight:"26px"}}/> <p>Dashboard</p> </a>
-            <a href="#" className='middle-details'> <TransIcon style={{marginRight:"26px"}}/> <p>Transaction</p></a>
-            <a href="#" className='middle-details'><ProfileIcon style={{marginRight:"26px"}}/> <p>Profile</p></a>
+            <a href="#" className='middle-details' onClick={()=>props.handleTabChange(0)}> <HomeIcon style={{marginRight:"26px"}}/> <p>Dashboard</p> </a>
+            <a href="#" className='middle-details' onClick={()=>props.handleTabChange(1)}> <TransIcon style={{marginRight:"26px"}}/> <p>Transaction</p></a>
+            <a href="#" className='middle-details' onClick={()=>props.handleTabChange(2)}><ProfileIcon style={{marginRight:"26px"}}/> <p>Profile</p></a>
             </div>
         </div>
         <hr />
-        <div class="bottom-section">
+        <div className="bottom-section">
            
            <img src={Avatar} style={{marginRight:"8px",}} />
            <div className='avatar-details'>
