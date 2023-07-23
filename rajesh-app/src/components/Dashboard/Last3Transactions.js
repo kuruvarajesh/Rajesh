@@ -41,8 +41,10 @@ return formattedDateAndTime
           <>
             <li className='list'>
               <div className='transaction-user-name'>
+                <div className='trans-icon'>
               {last.type==="debit"? props.user==="admin"?<DebitIconNormal/>:<DebitIcon />: props.user==="admin"? <CreditIconNormal />: <CreditIcon />}
-              <img src={last3User} alt="user"/>
+              </div>
+              <img src={last3User} alt="user" className='trans-user'/>
               <p className='trans-desc'>Arlene McCoy</p>
               </div>
               <p className='trans-desc'>{last.transaction_name}</p>

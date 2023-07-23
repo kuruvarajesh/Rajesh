@@ -21,7 +21,13 @@
     display:flex;
     justify-content:space-between; 
     align-items:center;
-    width:244px;
+    width:245px;
+}
+.trans-icon {
+    margin-right: 24px;
+}
+.trans-user{
+    margin-right: 8px;
 }
 .trans-desc{
     color: #505887;

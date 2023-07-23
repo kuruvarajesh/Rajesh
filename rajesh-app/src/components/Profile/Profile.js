@@ -6,6 +6,7 @@ import ProfileDetails from './ProfileDetails'
 import './Profile.css'
 
 const Profile = () => {
+    const [profileData,setProfileData] = useState({})
     const [apiStatus,setApiStatus] = useState("LOADING")
 
     const getProfileData = async() => {
@@ -17,8 +18,10 @@ const Profile = () => {
             "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
             "x-hasura-role":"admin"
             }}
-            const responseData = await fetch(url,options)
-            const response = await responseData.json()
+            const response = await fetch(url,options)
+            const responseData = await response.json()
+            const data  = responseData.users
+            setProfileData(data[0])
             setApiStatus("SUCCESS")
     }
 
@@ -34,8 +37,7 @@ const renderLoadingView = () => (
 
 const renderProfilePage = () => (
     <div className='profile-card'>
-        <ProfileDetails />
-        {/* <Last3Transactions data={activeTab==="allTransactions"?allTransactions:activeTab==="debit"?debitTransData:creditTransData} user={"admin"}/> */}
+        <ProfileDetails profileData={profileData} />
       </div>
 
 )
