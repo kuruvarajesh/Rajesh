@@ -1,3 +1,18 @@
+.dashboard-header{
+    display:flex;
+    flex-direction:column;
+    height:100vh;
+    /* position: absolute;
+    left: 252px; */
+    margin-left: 252px;
+    width: 86%;
+}
+.dashboard{
+    background-color: #F5F7FA;
+    height:100%;
+    padding: 20px 40px 40px 40px;
+    box-sizing: border-box;
+}
 .dashboard-page {
     box-sizing: border-box;
 }
@@ -82,5 +97,5 @@
     background: #FFF;
 }
 .dash-bottom-section{
-    margin-top: 10px;
+    margin-top: 32px;
 }
