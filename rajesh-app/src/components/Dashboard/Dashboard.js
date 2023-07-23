@@ -62,7 +62,7 @@ const getLast7daysCrDr = async() =>{
         }}
         const response = await fetch(url,options)
         const data = await response.json()
-        console.log(data)
+        // // console.log(data)
 
         // const transactions = data.transactions
         // // console.log(transactions)
@@ -107,7 +107,7 @@ useEffect(()=>{
         <div className='last-trans-section'>
         <p className='last-transaction'>Last Transaction</p>
         <div className='last-trans-card'>
-    <Last3Transactions data = {lastTransactions} />
+    <Last3Transactions data = {lastTransactions} user="user"/>
         </div>
 
         </div>

@@ -1,16 +1,27 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { Link } from 'react-router-dom'
 import AppLogo from '../Icons/AppLogo.js'
 import HomeIcon from '../Icons/HomeIcon.js'
 import TransIcon from '../Icons/TransIcon.js'
 import ProfileIcon from '../Icons/ProfileIcon.js'
 import LogoutIcon from '../Icons/LogoutIcon.js'
 import Avatar from '../Icons/Avatar.png'
+import DialogueBox from '../DialogueBox/DialogueBox'
 
 
 import './Sidebar.css'
-import { Link } from 'react-router-dom'
+
 
 const Sidebar = (props) => {
+  const [logout,setLogout] = useState(false)
+  const handleLogout = ()=>{
+    setLogout(true)
+  }
+
+  const handleCloseLogout = ()=>{
+    setLogout(false)
+  }
+
   return (
     <div>
          <div className="sidebar">
@@ -34,7 +45,8 @@ const Sidebar = (props) => {
             <h6 className='rhye'>Rhye</h6>
             <p className='rhye-email'>olivia@untitledui.com</p>
            </div>
-           <LogoutIcon />
+           <LogoutIcon onClick={handleLogout}/>
+           <DialogueBox openDialog={logout} handleCloseAdd={handleCloseLogout}/>
         </div>
     </div>
     

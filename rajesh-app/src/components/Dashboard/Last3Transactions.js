@@ -1,11 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DebitIcon from '../Icons/DebitIcon'
 import CreditIcon from '../Icons/CreditIcon'
+import DebitIconNormal from '../Icons/DebitIconNormal'
+import CreditIconNormal from '../Icons/CreditIconNormal'
 import last3User from '../Images/last3User.png'
 import './Last3Transactions.css'
 
 const Last3Transactions = (props) => {
-    console.log(props.data)
+   const [data,setData] = useState([])
+
+  //  const getTabData = ()=>{
+  //     if(props.user==="admin"){
+  //       const adminData = 
+  //     }
+  //  }
+
+  //  useEffect(()=>{
+  //   getTabData()
+  //  },[])
+
+    
     
 const dateObject = (date) =>{
     const dateObj = new Date(date);
@@ -26,8 +40,8 @@ return formattedDateAndTime
         {props.data.map((last,index)=>(
           <>
             <li className='list'>
-              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center", width:"180px"}}>
-              {last.type==="debit"? <DebitIcon />:<CreditIcon />}
+              <div className='transaction-user-name'>
+              {last.type==="debit"? props.user==="admin"?<DebitIconNormal/>:<DebitIcon />: props.user==="admin"? <CreditIconNormal />: <CreditIcon />}
               <img src={last3User} alt="user"/>
               <p className='trans-desc'>Arlene McCoy</p>
               </div>

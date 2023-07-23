@@ -1,0 +1,31 @@
+.transactions-header{
+    display:flex;
+    flex-direction:column;
+    /* height:100vh;
+    position: absolute;
+    left: 252px; */
+    width: 86%;
+    margin-left: 252px;
+    height: 100vh;
+}
+.transactions{
+    background-color: #F5F7FA;
+    height:100%;
+    padding: 20px 40px 40px 40px;
+    box-sizing: border-box;
+}
+
+.transactions-card {
+    display: flex;
+    width: 96.5%;
+    min-height: 210px;
+    padding: 12px 25px 8px 24px;
+    flex-direction: column;
+    /* justify-content: flex-end; */
+    align-items: flex-start;
+    gap: 8px;
+    flex-shrink: 0;
+    border-radius: 25px;
+    background: #FFF;
+    margin-top: 16px;
+}
