@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import './DialogueBox.css'; // Import your custom CSS file
+import DialogDeleteIcon from '../Icons/DialogDeleteIcon';
+import './DialogueBox.css'; 
 
 const DialogueBox = (props) => {
   const [isOpen, setIsOpen] = useState(props.openDialog);
@@ -19,10 +20,17 @@ const DialogueBox = (props) => {
       isOpen && (
         <div className="dialog-container">
           <div className="dialog-content">
-            <h3>Dialog Title</h3>
-            <p>Dialog content goes here...</p>
-            <button onClick={handleClose}>Close</button>
-            <button onClick={handleClose}>Save</button>
+            <DialogDeleteIcon />
+            <div className='dialog-card'>
+            <div className='dialog-text-card'>
+            <p className='dialog-head'>Are you sure want to Delete?</p>
+            <p className='dialog-para'>The transaction will be deleted immediately, You can't undo this action.</p>
+            </div>
+            <div className='buttons'>
+            <button onClick={handleClose} className='button delete-button'>Yes, Delete</button>
+            <button onClick={handleClose} className='button leave-button' >No, Leave</button>
+            </div>
+            </div>
           </div>
         </div>
       )

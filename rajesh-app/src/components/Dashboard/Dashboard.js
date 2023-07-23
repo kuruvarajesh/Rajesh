@@ -4,6 +4,7 @@ import debitImg from '../Images/debit.png'
 import './Dashboard.css'
 import Barchart from '../PieChart/Barchart'
 import Last3Transactions from './Last3Transactions'
+import Header from '../Header/Header'
 
 const Dashboard = (props) => {
     const [apiData,setApiData] = useState([])
@@ -51,7 +52,7 @@ const getLastTransactions = async() =>{
 }
 
 const getLast7daysCrDr = async() =>{
-    const url  = " https://bursting-gelding-24.hasura.app/api/rest/daywise-totals-7-days"
+    const url  = "https://bursting-gelding-24.hasura.app/api/rest/daywise-totals-last-7-days-admin"
         const options = {
         method:"GET",
         headers :{
@@ -61,7 +62,7 @@ const getLast7daysCrDr = async() =>{
         }}
         const response = await fetch(url,options)
         const data = await response.json()
-        console.log(data)
+        // // console.log(data)
 
         // const transactions = data.transactions
         // // console.log(transactions)
@@ -78,6 +79,9 @@ useEffect(()=>{
 
 
   return (
+   <div className='dashboard-header'>
+    <Header header={"Accounts"} tabsOpen={false}/>
+    <div className='dashboard'>
     <div className='dashboard-page'>
         <div className='dashboard-top'>
         <div className='dash-top-card'>
@@ -103,7 +107,7 @@ useEffect(()=>{
         <div className='last-trans-section'>
         <p className='last-transaction'>Last Transaction</p>
         <div className='last-trans-card'>
-    <Last3Transactions data = {lastTransactions} />
+    <Last3Transactions data = {lastTransactions} user="user"/>
         </div>
 
         </div>
@@ -113,6 +117,8 @@ useEffect(()=>{
                 <Barchart />
             </div>
         </div>
+    </div>
+    </div>
     </div>
   )
 }

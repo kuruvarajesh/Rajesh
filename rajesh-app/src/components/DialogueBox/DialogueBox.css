@@ -23,18 +23,28 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity here for the dim effect */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9999; /* Make sure the dim overlay is on top of other content */
+    z-index: 9999; 
+    /* background: rgba(52, 64, 84, 0.70); */
+    backdrop-filter: blur(8px);
   }
   
   .dialog-content {
-    background-color: #fff;
     padding: 20px;
-    border-radius: 4px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 591px;
+    height: 188px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    background: #FFF;
+    box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.05), 0px 10px 15px -3px rgba(0, 0, 0, 0.10);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 27px;
   }
   
   .dialog-content h3 {
@@ -44,4 +54,68 @@
   .dialog-content button {
     margin-right: 10px;
   }
+  .dialog-card{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .dialog-text-card{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .dialog-head{
+    color: #333B69;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px; /* 140% */
+  }
+  .dialog-para{
+    color: #505887;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+  }
+.buttons{
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.button{
+  display: flex;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   
+}
+  .delete-button{
+    border-radius: 8px;
+    background: #DC2626;
+    outline: none;
+    border: none;
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+  }
+  .leave-button{
+    border-radius: 8px;
+    border: 1px solid #CBD5E1;
+    background: #FFF;
+    color: #333B69;
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; 
+  }
