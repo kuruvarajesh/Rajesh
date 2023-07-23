@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { TailSpin } from "react-loader-spinner";
 import creditImg from '../Images/credit.png'
 import debitImg from '../Images/debit.png'
 import './Dashboard.css'
@@ -12,6 +13,7 @@ const Dashboard = (props) => {
     const [debit, setDebit] = useState(0)
     const [lastTransactions,setTransactions] = useState([])
     const [data,setData]= useState([])
+    const [apiStatus,setApiStatus] = useState("LOADING")
 
 const getTransactionsTotal = async()=>{
         const url  = "https://bursting-gelding-24.hasura.app/api/rest/transaction-totals-admin"
@@ -49,6 +51,7 @@ const getLastTransactions = async() =>{
         const transactions = data.transactions
         // console.log(transactions)
         setTransactions(transactions)
+        setApiStatus("SUCCESS")
 }
 
 const getLast7daysCrDr = async() =>{
@@ -77,47 +80,67 @@ useEffect(()=>{
 },[])
 
 
+const renderLoadingView = () => (
+    <div className="loader-container">
+    <TailSpin type="ThreeDots" color="#0b69ff" height="50" width="50" />
+    </div>
+    )
+
+  const renderDashBoardPage = () =>(
+    <div className='dashboard-page'>
+    <div className='dashboard-top'>
+    <div className='dash-top-card'>
+        <div className='top-credit-debit'>
+            <h1 className='credit-amount'>${credit}</h1>
+            <p className='credit'>Credit</p>
+        </div>
+        <div>
+        <img src={creditImg}  alt="credit"/>
+        </div>
+    </div>
+
+    <div className='dash-top-card'>
+        <div className='top-credit-debit'>
+            <h3 className='debit-amount'>${debit}</h3>
+            <p className='credit'>Debit</p>
+        </div>
+       
+        <img src={debitImg}  alt="debit"/>
+    
+    </div>
+    </div>
+    <div className='last-trans-section'>
+    <p className='last-transaction'>Last Transaction</p>
+    <div className='last-trans-card'>
+    <Last3Transactions data = {lastTransactions} user="user"/>
+    </div>
+
+    </div>
+    <div className='dash-bottom-section'>
+        <p className='last-transaction'>Debit & Credit Overview</p>
+        <div className='bottom-trans-card'>
+            <Barchart />
+        </div>
+    </div>
+    </div>
+  )
+
+const getDashBoardPageData = () =>{
+    switch(apiStatus){
+        case "SUCCESS":
+            return renderDashBoardPage()
+        case "LOADING":
+            return renderLoadingView()
+    }
+}
 
   return (
    <div className='dashboard-header'>
     <Header header={"Accounts"} tabsOpen={false}/>
     <div className='dashboard'>
-    <div className='dashboard-page'>
-        <div className='dashboard-top'>
-        <div className='dash-top-card'>
-            <div className='top-credit-debit'>
-                <h1 className='credit-amount'>${credit}</h1>
-                <p className='credit'>Credit</p>
-            </div>
-            <div>
-            <img src={creditImg}  alt="credit"/>
-            </div>
-        </div>
-
-        <div className='dash-top-card'>
-            <div className='top-credit-debit'>
-                <h3 className='debit-amount'>${debit}</h3>
-                <p className='credit'>Debit</p>
-            </div>
-           
-            <img src={debitImg}  alt="debit"/>
-        
-        </div>
-        </div>
-        <div className='last-trans-section'>
-        <p className='last-transaction'>Last Transaction</p>
-        <div className='last-trans-card'>
-    <Last3Transactions data = {lastTransactions} user="user"/>
-        </div>
-
-        </div>
-        <div className='dash-bottom-section'>
-            <p className='last-transaction'>Debit & Credit Overview</p>
-            <div className='bottom-trans-card'>
-                <Barchart />
-            </div>
-        </div>
-    </div>
+    
+       {getDashBoardPageData()}
+    
     </div>
     </div>
   )

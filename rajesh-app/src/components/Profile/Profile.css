@@ -18,8 +18,8 @@
 .profile-card {
     display: flex;
     width: 96.5%;
-    min-height: 210px;
-    padding: 12px 25px 8px 24px;
+    /* min-height: 210px; */
+    padding: 26px 30px;
     flex-direction: column;
     /* justify-content: flex-end; */
     align-items: flex-start;
@@ -28,4 +28,55 @@
     border-radius: 25px;
     background: #FFF;
     margin-top: 16px;
+
+}
+.profile-image{
+    width: 342px;
+}
+.profile-img{
+    border-radius: 50%;
+}
+.profile-details{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.inputs-container{
+    display: flex;
+    justify-content: flex-start;
+    gap: 29px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+input{
+    width: 418px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    border: 1px solid #DFEAF2;
+    background: #FFF;
+    outline: none;
+    color: #718EBF;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding: 0px 20px;
+    /* margin-top: 11px; */
+
+}
+label{
+    color: #505887;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+.input-items{
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    margin-bottom: 22px;
 }

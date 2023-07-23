@@ -7,6 +7,7 @@ import ProfileIcon from '../Icons/ProfileIcon.js'
 import LogoutIcon from '../Icons/LogoutIcon.js'
 import Avatar from '../Icons/Avatar.png'
 import DialogueBox from '../DialogueBox/DialogueBox'
+import AddTransaction from '../Icons/AddTransaction.js'
 
 
 import './Sidebar.css'
@@ -46,7 +47,7 @@ const Sidebar = (props) => {
             <p className='rhye-email'>olivia@untitledui.com</p>
            </div>
            <LogoutIcon onClick={handleLogout}/>
-           <DialogueBox openDialog={logout} handleCloseAdd={handleCloseLogout}/>
+           <AddTransaction openDialog={logout} handleCloseAdd={handleCloseLogout}/>
         </div>
     </div>
     
