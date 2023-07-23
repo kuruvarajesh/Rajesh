@@ -15,7 +15,7 @@ const [address,setAddress] = useState(profileData.permanent_address?profileData.
 const [city,setCity] = useState(profileData.city?profileData.city:'')
 const [postalCode, setPostalCode] = useState(profileData.postal_code?profileData.postal_code:'')
 const [country,setCountry] = useState(profileData.country?profileData.country:'')
-console.log(profileData)
+// console.log(profileData)
 
 const handleUserName = (event)=>{
   setName(event.target.value)
@@ -30,10 +30,10 @@ const handlePassword = (event)=>{
 }
 
 const handleDOB = (event)=>{
-  setPassword(event.target.value)
+  setDOB(event.target.value)
 }
 const handlePresentAddress = (event)=>{
-  setPassword(event.target.value)
+  setPresentAddress(event.target.value)
 }
 
 const handleAddress = (event) =>{
@@ -44,10 +44,10 @@ const handleCity = (event) =>{
   setCity(event.target.value)
 }
 const handlePostalCode = (event) =>{
-  setCity(event.target.value)
+  setPostalCode(event.target.value)
 }
 const handleCountry = (event) =>{
-  setCity(event.target.value)
+  setCountry(event.target.value)
 }
 
   const renderName = ()=>(
@@ -58,7 +58,7 @@ const handleCountry = (event) =>{
       </div>
       <div className='input-items'>
         <label>User Name</label>
-        <input type='input' value={name} onChange={handleUserName}/>
+        <input type='text' value={name} onChange={handleUserName}/>
     </div>
     </div>
 
@@ -67,11 +67,11 @@ const handleCountry = (event) =>{
     <div className='inputs-container'>
     <div className='input-items'>
       <label>Date of Birth</label>
-      <input type="date" value={email} onChange={handleEmail}/>
+      <input type="email" value={email} onChange={handleEmail}/>
     </div>
     <div className='input-items'>
       <label>Password</label>
-      <input type='text' value={password} onChange={handlePassword}/>
+      <input type='password' value={password} onChange={handlePassword}/>
   </div>
   </div>
   )
@@ -79,12 +79,12 @@ const handleCountry = (event) =>{
   const renderDOBAndPresentAddress =() =>(
     <div className='inputs-container'>
     <div className='input-items'>
-      <label>Email</label>
-      <input type="email" value={email} onChange={handleDOB}/>
+      <label>Date</label>
+      <input type="date" value={dob} onChange={handleDOB}/>
     </div>
     <div className='input-items'>
-      <label>Password</label>
-      <input type='password' value={password} onChange={handlePresentAddress}/>
+      <label>present Address</label>
+      <input type='text' value={presentAddress} onChange={handlePresentAddress}/>
   </div>
   </div>
   )

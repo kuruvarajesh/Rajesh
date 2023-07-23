@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DialogCancelIcon from '../Icons/DialogCancelIcon';
 import './AddTransaction.css'; 
 
-const AddTransaction = (props) => {
+const UpdateTransaction = (props) => {
   const [isOpen, setIsOpen] = useState(props.openDialog);
   const [name,setName] = useState('')
   const [amount,setAmount] = useState()
@@ -116,16 +116,6 @@ const handleAddTransaction = (event)=>{
       <input type="text" placeholder='Select Date' value={date} onChange={handleDate} />
     </div>
   )
-//   const renderCodeAndCountry =() =>(
-//     <div className='inputs-container'>
-//     <div className='input-items'>
-//       <label>Postal Code</label>
-//       <input type="number" value={postalCode} onChange={handlePostalCode}/>
-//     </div>
-    
-//   </div>
-//   )
-
 
 
   return (  
@@ -135,10 +125,10 @@ const handleAddTransaction = (event)=>{
             <div className='add-card'>
             <div className='add-text-card'>
             <div className='trans-cancel-container'>
-            <p className='add-head'>Add Transaction</p>
+            <p className='add-head'>Update Transaction</p>
             <DialogCancelIcon onClick={handleClose}/>
             </div>
-            <p className='add-para'>Lorem ipsum dolor sit amet, consectetur.</p>
+            <p className='add-para'>You can update your transaction here.</p>
             </div>
             <form onSubmit={handleAddTransaction}>
             {renderName()}
@@ -160,4 +150,4 @@ const handleAddTransaction = (event)=>{
   );
 };
 
-export default AddTransaction;
+export default UpdateTransaction;

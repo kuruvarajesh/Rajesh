@@ -66,3 +66,23 @@
     line-height: normal;
     width: 174px;
 }
+.input-element{
+        box-sizing: border-box;
+        width: 418px;
+        height: 50px;
+        flex-shrink: 0;
+        border-radius: 15px;
+        border: 1px solid #DFEAF2;
+        background: #FFF;
+        outline: none;
+        color: #718EBF;
+        font-family: Inter;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        padding: 0px 20px;
+        /* margin-top: 11px; */
+    
+    
+}
