@@ -42,7 +42,7 @@ const data = [
 const Barchart = (props)=>{
  
     return (
-      <ResponsiveContainer width={1356} height={364} border="1px solid red">
+      <ResponsiveContainer width={1000} height={364} >
         <BarChart
           width={500}
           height={300}

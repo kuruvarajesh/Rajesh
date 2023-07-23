@@ -8,6 +8,7 @@ import Avatar from '../Icons/Avatar.png'
 
 
 import './Sidebar.css'
+import { Link } from 'react-router-dom'
 
 const Sidebar = (props) => {
   return (
@@ -20,9 +21,9 @@ const Sidebar = (props) => {
         </div>
         <div className="middle-section" style={{flex:1}}>
             <div>
-            <a href="#" className='middle-details' onClick={()=>props.handleTabChange(0)}> <HomeIcon style={{marginRight:"26px"}}/> <p>Dashboard</p> </a>
-            <a href="#" className='middle-details' onClick={()=>props.handleTabChange(1)}> <TransIcon style={{marginRight:"26px"}}/> <p>Transaction</p></a>
-            <a href="#" className='middle-details' onClick={()=>props.handleTabChange(2)}><ProfileIcon style={{marginRight:"26px"}}/> <p>Profile</p></a>
+            <Link to='/' className='middle-details' > <HomeIcon style={{marginRight:"26px"}}/> <p>Dashboard</p> </Link>
+            <Link to='/transactions' className='middle-details' > <TransIcon style={{marginRight:"26px"}}/> <p>Transaction</p></Link>
+            <Link to="/profile" className='middle-details' ><ProfileIcon style={{marginRight:"26px"}}/> <p>Profile</p></Link>
             </div>
         </div>
         <hr />
