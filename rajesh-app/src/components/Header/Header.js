@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-import AddTransaction from '../Icons/AddTransaction'
+import AddTransactionIcon from '../Icons/AddTransactionIcon'
 import './Header.css'
 import DialogueBox from '../DialogueBox/DialogueBox';
+import AddTransaction from '../DialogueBox/AddTransaction';
+import UpdateTransaction from '../DialogueBox/UpdateTransaction';
 
 
 
@@ -29,8 +31,8 @@ const Header = (props) => {
             <h1 className='header-heading'>{header}</h1>
        
         <div>
-            <button className='add-trans' onClick={handleOpenAdd}> <AddTransaction />  Add Transactions</button>
-            <DialogueBox openDialog={addTransaction} handleCloseAdd={handleCloseAdd}/>
+            <button className='add-trans' onClick={handleOpenAdd}> <AddTransactionIcon />  Add Transactions</button>
+            <UpdateTransaction openDialog={addTransaction} handleCloseAdd={handleCloseAdd}/>
         </div>
         </div>
         {tabsData?  (

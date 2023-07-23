@@ -38,7 +38,7 @@ const getAllTransactions = async()=>{
 
         const debitData = allTransactionsData.filter((data)=> data.type==="debit")
         const creditData = allTransactionsData.filter((data)=> data.type==="credit")
-        console.log("R",allTransactionsData)
+        // console.log("R",allTransactionsData)
 
 
         setAllTransactions(allTransactionsData)
@@ -69,7 +69,7 @@ const renderLoadingView = () =>{
 const renderTransactionsView = () =>(
   <div className='transactions-card'>
     <ul className='transaction-header-card'>
-    <li className='transaction-header-list'>
+    <li className='transaction-header-list' >
         <div className='trans-user-header'>User Name
         </div>
         <div className='trans-header'>Transaction Name</div>

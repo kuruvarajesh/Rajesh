@@ -1,5 +1,5 @@
 import * as React from "react"
-const AddTransaction = (props) => (
+const AddTransactionIcon = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={14}
@@ -16,4 +16,4 @@ const AddTransaction = (props) => (
     />
   </svg>
 )
-export default AddTransaction
+export default AddTransactionIcon

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import DialogDeleteIcon from '../Icons/DialogDeleteIcon';
 import DialogCancelIcon from '../Icons/DialogCancelIcon';
-
+import LogoutIconDialog from '../Icons/LogoutIconDialog';
 import './DialogueBox.css'; 
 
-const DialogueBox = (props) => {
+const LogoutDialog = (props) => {
   const [isOpen, setIsOpen] = useState(props.openDialog);
  
   useEffect(()=>{
@@ -21,29 +20,29 @@ const DialogueBox = (props) => {
       
       isOpen && (
         <div className="dialog-container">
-          <div className='dialog-content'>
-
-         
-         <div className='dialog-cancel-icon'>
+           
+            
+          <div className="dialog-content">
+            <div className='dialog-cancel-icon'>
             <DialogCancelIcon onClick={handleClose} />
             </div>
             <div className='dialog-content-2'>
-            <DialogDeleteIcon />
+            <LogoutIconDialog />
             <div className='dialog-card'>
             <div className='dialog-text-card'>
-            <p className='dialog-head'>Are you sure want to Delete?</p>
-            <p className='dialog-para'>The transaction will be deleted immediately, You can't undo this action.</p>
+            <p className='dialog-head'>Are you sure want to Logout?</p>
+            <p className='dialog-para'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
             </div>
             <div className='buttons'>
-            <button onClick={handleClose} className='button delete-button'>Yes, Delete</button>
-            <button onClick={handleClose} className='button leave-button' >No, Leave</button>
+            <button onClick={handleClose} className='button delete-button'>Yes, Logout</button>
+            <button onClick={handleClose} className='button leave-button' >Cancel</button>
             </div>
             </div>
           </div>
-        </div>
+          </div>
         </div>
       )
   );
 };
 
-export default DialogueBox;
+export default LogoutDialog;

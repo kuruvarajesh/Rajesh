@@ -29,7 +29,7 @@ const dateObject = (date) =>{
     const hours = dateObj.getHours();
     const minutes = dateObj.getMinutes();
     const meridiem = hours >= 12 ? "PM" : "AM";
-    console.log(dateObj)
+    // console.log(dateObj)
 
 const formattedDateAndTime = `${day} ${month} ${hours % 12 === 0 ? 12 : hours % 12}:${minutes.toString().padStart(2, '0')} ${meridiem}`; 
 return formattedDateAndTime
@@ -39,7 +39,7 @@ return formattedDateAndTime
     <ul className='un-list'>
         {props.data.map((last,index)=>(
           <>
-            <li className='list'>
+            <li className='list' key={index}>
               <div className='transaction-user-name'>
                 <div className='trans-icon'>
               {last.type==="debit"? props.user==="admin"?<DebitIconNormal/>:<DebitIcon />: props.user==="admin"? <CreditIconNormal />: <CreditIcon />}
