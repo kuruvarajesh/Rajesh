@@ -24,16 +24,18 @@ const Transactions = () => {
     const [apiStatus,setApiStates] = useState("LOADING")
 
 const getAllTransactions = async()=>{
-        const url  = "https://bursting-gelding-24.hasura.app/api/rest/all-transactions?limit=10&offset=0"
-        const options = {
-        method:"GET",
-        headers :{
-            "content-type":"application/json",
-        "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
-        "x-hasura-role":"admin"
-        }}
+      const url  = "https://bursting-gelding-24.hasura.app/api/rest/all-transactions?limit=10&offset=0"
+      const options = {
+      method:"GET",
+      headers :{
+          "content-type":"application/json",
+      "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
+      "x-hasura-role":"user",
+      "x-hasura-user-id":"1"
+      }}
         const response = await fetch(url,options)
         const responseData = await response.json()
+        
         const allTransactionsData = responseData.transactions
 
         const debitData = allTransactionsData.filter((data)=> data.type==="debit")

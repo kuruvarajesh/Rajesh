@@ -8,10 +8,13 @@ import LogoutIcon from '../Icons/LogoutIcon.js'
 import Avatar from '../Icons/Avatar.png'
 import DialogueBox from '../DialogueBox/DialogueBox'
 import LogoutDialog from '../DialogueBox/LogoutDialog.js'
+import {HOME_ROUTE_PATH,TRANSACTIONS_ROUTE_PATH, PROFILE_ROUTE_PATH } from '../../constants';
+
 import './Sidebar.css'
 
 
 const Sidebar = (props) => {
+  console.log(props)
   const [logout,setLogout] = useState(false)
   const handleLogout = ()=>{
     setLogout(true)
@@ -27,13 +30,12 @@ const Sidebar = (props) => {
             <div className="top-section">
             <AppLogo />
             <h3 className='money'>Money <span className='matters'>Matters</span></h3>
-          
         </div>
         <div className="middle-section" style={{flex:1}}>
             <div>
-            <Link to='/' className='middle-details' > <HomeIcon style={{marginRight:"26px"}}/> <p>Dashboard</p> </Link>
-            <Link to='/transactions' className='middle-details' > <TransIcon style={{marginRight:"26px"}}/> <p>Transaction</p></Link>
-            <Link to="/profile" className='middle-details' ><ProfileIcon style={{marginRight:"26px"}}/> <p>Profile</p></Link>
+            <Link to={HOME_ROUTE_PATH} className='middle-details' > <HomeIcon style={{marginRight:"26px"}}/> <p>Dashboard</p> </Link>
+            <Link to={TRANSACTIONS_ROUTE_PATH} className='middle-details' > <TransIcon style={{marginRight:"26px"}}/> <p>Transaction</p></Link>
+            <Link to={PROFILE_ROUTE_PATH} className='middle-details' ><ProfileIcon style={{marginRight:"26px"}}/> <p>Profile</p></Link>
             </div>
         </div>
         <hr />

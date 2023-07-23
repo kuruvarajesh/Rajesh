@@ -10,18 +10,21 @@ const Profile = () => {
     const [apiStatus,setApiStatus] = useState("LOADING")
 
     const getProfileData = async() => {
-        const url="https://bursting-gelding-24.hasura.app/api/rest/profile"
-        const options = {
-            method:"GET",
-            headers :{
-                "content-type":"application/json",
-            "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
-            "x-hasura-role":"admin"
-            }}
+        const url  = "https://bursting-gelding-24.hasura.app/api/rest/profile"
+      const options = {
+      method:"GET",
+      headers :{
+          "content-type":"application/json",
+      "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
+      "x-hasura-role":"user",
+      "x-hasura-user-id":"1"
+      }}
             const response = await fetch(url,options)
             const responseData = await response.json()
-            const data  = responseData.users
-            setProfileData(data[0])
+          
+            const data  = responseData.users[0]
+            console.log("===>",data)
+            setProfileData(data)
             setApiStatus("SUCCESS")
     }
 

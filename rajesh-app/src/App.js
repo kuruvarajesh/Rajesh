@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar/Sidebar'
 import Dashboard from './components/Dashboard/Dashboard';
 import Transactions from './components/Transactions/Transactions';
 import Profile from './components/Profile/Profile';
+import {HOME_ROUTE_PATH,TRANSACTIONS_ROUTE_PATH, PROFILE_ROUTE_PATH } from './constants';
 
 
 function App() {
@@ -12,9 +13,9 @@ function App() {
    <BrowserRouter >
       <Sidebar />
    <Routes>
-      <Route exact path="/" element={ <Dashboard />}  /> 
-      <Route exact path="/transactions" element={<Transactions />} />
-      <Route exact path="/profile" element={<Profile />} />
+      <Route exact path={HOME_ROUTE_PATH} element={ <Dashboard />}  /> 
+      <Route exact path={TRANSACTIONS_ROUTE_PATH} element={<Transactions />} />
+      <Route exact path={PROFILE_ROUTE_PATH} element={<Profile />} />
    </Routes>
    </BrowserRouter>
   );
