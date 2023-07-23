@@ -11,14 +11,25 @@ const AddTransaction = (props) => {
   const [type, setType] = useState('')
 
   const getAddTransactionData = async() => {
-        const url = " https://bursting-gelding-24.hasura.app/api/rest/add-transaction"
-        const options = {
+            const url  = "https://bursting-gelding-24.hasura.app/api/rest/add-transaction"
+            const addData = {
+              "name": name,
+              "type": type,
+              "category": category,
+              "amount": amount,
+              "date": date,
+              "user_id": 1
+          }
+            const options = {
             method:"POST",
             headers :{
                 "content-type":"application/json",
             "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
-            "x-hasura-role":"admin"
-            }}
+            "x-hasura-role":"user",
+            "x-hasura-user-id":"1"
+            },
+            body: JSON.stringify(addData)
+          }
             const response = await fetch(url,options)
             const responseData = await response.json()
             // console.log(responseData)
@@ -39,29 +50,34 @@ const AddTransaction = (props) => {
 
 const handleAddTransaction = (event)=>{
     event.preventDefault()
-    console.log("Yes")
-    console.log(event.target.value)
+    getAddTransactionData()
+   
 
 }
 
   const handleName = (event)=>{
     setName(event.target.value)
+   
   }
 
   const handleTransactionType = (event)=>{
         setType(event.target.value)
+       
   }
   
   const handleCategory = event=>{
     setCategory(event.target.value)
+   
   }
 
   const handleAmount = (event)=>{
     setAmount(event.target.value)
+   
   }
   
   const handleDate = (event)=>{
     setDate(event.target.value)
+   
   }
   
    
@@ -107,26 +123,15 @@ const handleAddTransaction = (event)=>{
   const renderAmount =() =>(
     <div className='add-input-items'>
       <label> Amount</label>
-      <input type="text" placeholder='Enter Your Amount' value={amount} onChange={handleAmount} />
+      <input type="number" placeholder='Enter Your Amount' value={amount} onChange={handleAmount} />
     </div>
   )
   const renderDate =() =>(
     <div className='add-input-items'>
       <label>Date</label>
-      <input type="text" placeholder='Select Date' value={date} onChange={handleDate} />
+      <input type="date" placeholder='Select Date' value={date} onChange={handleDate} />
     </div>
   )
-//   const renderCodeAndCountry =() =>(
-//     <div className='inputs-container'>
-//     <div className='input-items'>
-//       <label>Postal Code</label>
-//       <input type="number" value={postalCode} onChange={handlePostalCode}/>
-//     </div>
-    
-//   </div>
-//   )
-
-
 
   return (  
       isOpen && (

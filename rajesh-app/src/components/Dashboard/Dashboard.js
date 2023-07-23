@@ -16,19 +16,18 @@ const Dashboard = (props) => {
     const [apiStatus,setApiStatus] = useState("LOADING")
 
 const getTransactionsTotal = async()=>{
-        const url  = "https://bursting-gelding-24.hasura.app/api/rest/transaction-totals-admin"
+        const url  = "https://bursting-gelding-24.hasura.app/api/rest/credit-debit-totals"
         const options = {
         method:"GET",
         headers :{
             "content-type":"application/json",
         "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
-        "x-hasura-role":"admin"
+        "x-hasura-role":"user",
+        "x-hasura-user-id":"1"
         }}
         const response = await fetch(url,options)
         const data = await response.json()
-        // console.log(data)
-
-        const amount = data.transaction_totals_admin
+        const amount = data.totals_credit_debit_transactions
         setDebit(amount[0].sum)
         setCredit(amount[1].sum)
         
@@ -36,17 +35,17 @@ const getTransactionsTotal = async()=>{
 }
 
 const getLastTransactions = async() =>{
-    const url  = "https://bursting-gelding-24.hasura.app/api/rest/all-transactions?limit=3&offset=0"
+        const url  = "https://bursting-gelding-24.hasura.app/api/rest/all-transactions?limit=3&offset=0"
         const options = {
         method:"GET",
         headers :{
             "content-type":"application/json",
         "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
-        "x-hasura-role":"admin"
+        "x-hasura-role":"user",
+        "x-hasura-user-id":"1"
         }}
         const response = await fetch(url,options)
         const data = await response.json()
-        
 
         const transactions = data.transactions
         // console.log(transactions)
@@ -54,19 +53,19 @@ const getLastTransactions = async() =>{
         setApiStatus("SUCCESS")
 }
 
-const getLast7daysCrDr = async() =>{
-    const url  = "https://bursting-gelding-24.hasura.app/api/rest/daywise-totals-last-7-days-admin"
-        const options = {
-        method:"GET",
-        headers :{
-            "content-type":"application/json",
-        "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
-        "x-hasura-role":"admin"
-        }}
+const getLast7daysTransactions = async() =>{
+    const url  = "https://bursting-gelding-24.hasura.app/api/rest/daywise-totals-7-days"
+    const options = {
+    method:"GET",
+    headers :{
+        "content-type":"application/json",
+    "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
+    "x-hasura-role":"user",
+    "x-hasura-user-id":"1"
+    }}
         const response = await fetch(url,options)
         const data = await response.json()
-        // // console.log(data)
-
+       
         // const transactions = data.transactions
         // // console.log(transactions)
         // setTransactions(transactions)
@@ -75,7 +74,7 @@ const getLast7daysCrDr = async() =>{
 useEffect(()=>{
     getLastTransactions()
     getTransactionsTotal()
-    getLast7daysCrDr()
+    getLast7daysTransactions()
    
 },[])
 

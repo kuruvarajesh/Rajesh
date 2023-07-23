@@ -32,7 +32,7 @@ const Header = (props) => {
        
         <div>
             <button className='add-trans' onClick={handleOpenAdd}> <AddTransactionIcon />  Add Transactions</button>
-            <UpdateTransaction openDialog={addTransaction} handleCloseAdd={handleCloseAdd}/>
+            <AddTransaction openDialog={addTransaction} handleCloseAdd={handleCloseAdd}/>
         </div>
         </div>
         {tabsData?  (
