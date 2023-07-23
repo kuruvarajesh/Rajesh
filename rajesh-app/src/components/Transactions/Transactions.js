@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react' 
+import { TailSpin } from "react-loader-spinner";
 
 import Header from '../Header/Header'
 
@@ -20,6 +21,7 @@ const Transactions = () => {
     const [creditTransData, setCreditTransData] = useState([])
     const [tabsData,setTabsData] = useState(initialTabsdata)
     const [activeTab, setActiveTab] = useState("allTransactions")
+    const [apiStatus,setApiStates] = useState("LOADING")
 
 const getAllTransactions = async()=>{
         const url  = "https://bursting-gelding-24.hasura.app/api/rest/all-transactions?limit=11&offset=0"
@@ -42,6 +44,7 @@ const getAllTransactions = async()=>{
         setAllTransactions(allTransactionsData)
         setDebitTransData(debitData)
         setCreditTransData(creditData)
+        setApiStates("SUCCESS")
         
     
 }
@@ -55,15 +58,36 @@ const handleTransTab = (tabId) => {
 setActiveTab(tabId)
 }
 
+const renderLoadingView = () =>{
+  return (
+  <div className="loader-container">
+  <TailSpin type="ThreeDots" color="#0b69ff" height="50" width="50" />
+  </div>
+  )
+}
+
+const renderTransactionsView = () =>(
+  <div className='transactions-card'>
+          <Last3Transactions data={activeTab==="allTransactions"?allTransactions:activeTab==="debit"?debitTransData:creditTransData} user={"admin"}/>
+        </div>
+)
+
+const renderView = () =>{
+  switch(apiStatus){
+    case "LOADING":
+      return renderLoadingView()
+      case 'SUCCESS':
+        return renderTransactionsView()
+      default:
+        return null
+  }
+}
 
   return (
     <div className='transactions-header'>
       <Header header={"Transactions"} tabsData={tabsData} handleTabChange = {handleTransTab} activeTab={activeTab}/>
       <div className='transactions'>
-        <div className='transactions-card'>
-          <Last3Transactions data={activeTab==="allTransactions"?allTransactions:activeTab==="debit"?debitTransData:creditTransData} user={"admin"}/>
-        </div>
-
+      {renderView()}
       </div>
     </div>
   )

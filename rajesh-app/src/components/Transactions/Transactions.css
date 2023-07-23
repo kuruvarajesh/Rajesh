@@ -29,3 +29,9 @@
     background: #FFF;
     margin-top: 16px;
 }
+.loader-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
