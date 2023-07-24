@@ -47,15 +47,12 @@ const LoginForm = () => {
     const submitForm = async event => {
       event.preventDefault()
       const userDetails = { username, password }
-      console.log(USERS_LOGIN_CREDITS)
       const isUserMatched = USERS_LOGIN_CREDITS.find(
         (user) => user.username === username && user.password === password
       );
       const isAdmin =  ADMIN_LOGIN_CREDITS.find((admin) =>
           admin.username === username && admin.password === password
       );
-      console.log(ADMIN_LOGIN_CREDITS)
-      console.log("user",isAdmin)
       if (isAdmin){
         renderAdminApp(isAdmin.id)
      }
@@ -63,26 +60,22 @@ const LoginForm = () => {
         renderUserApp(isUserMatched.id)
      }
      else{
-     
+      onSubmitFailure()
      }
      
 
-      // const options = {
-      //   method: 'POST',
-      //   body: JSON.stringify(userDetails),
-      // }
-  
-      // try {
-      //   const response = await fetch(url, options)
-      //   const data = await response.json()
-      //   if (response.ok === true) {
-      //     onSubmitSuccess(data.jwt_token)
-      //   } else {
-      //     onSubmitFailure(data.error_msg)
-      //   }
-      // } catch (error) {
-      //   console.error('Error while submitting the form:', error)
-      // }
+     //const url = "https://bursting-gelding-24.hasura.app/api/rest/get-user-id"
+     //   const isUserMatched = USERS_LOGIN_CREDITS.find(
+     //     (user) => user.username === username && user.password === password
+     //   );
+     //   const isAdmin = (ADMIN_LOGIN_CREDITS.username===username) && (ADMIN_LOGIN_CREDITS.password===password)
+ 
+     //   if (isAdmin){
+     //     renderAdminApp()
+     //  }
+     //  else if(isUserMatched){
+     //     renderUserApp()
+     //  }
     }
   
     const renderPasswordField = () => {
@@ -124,22 +117,9 @@ const LoginForm = () => {
    
     return (
       <div className="login-form-container">
-        {/* <img
-          src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-logo-img.png"
-          className="login-website-logo-mobile-img"
-          alt="website logo"
-        />
-        <img
-          src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-login-img.png"
-          className="login-img"
-          alt="website login"
-        /> */}
+      
         <form className="form-container" onSubmit={submitForm}>
-          {/* <img
-            src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-logo-img.png"
-            className="login-website-logo-desktop-img"
-            alt="website logo"
-          /> */}
+         
           <div className='money-matters-login-logo'>
           <AppLogo />
          <h2 className='money'>Money <span className='matters'>Matters</span></h2>

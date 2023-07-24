@@ -15,7 +15,7 @@ const [address,setAddress] = useState(profileData.permanent_address?profileData.
 const [city,setCity] = useState(profileData.city?profileData.city:'')
 const [postalCode, setPostalCode] = useState(profileData.postal_code?profileData.postal_code:'')
 const [country,setCountry] = useState(profileData.country?profileData.country:'')
-// console.log(profileData)
+
 
 const handleUserName = (event)=>{
   setName(event.target.value)
