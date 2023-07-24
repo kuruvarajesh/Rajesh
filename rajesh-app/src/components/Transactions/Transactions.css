@@ -55,7 +55,7 @@
     height: 30px;
 }
 .trans-user-header{
-    width: 245px;
+    width: 120px;
 }
 .trans-header{
     color: #343C6A;
@@ -64,7 +64,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    width: 174px;
+    /* width: 174px; */
 }
 .input-element{
         box-sizing: border-box;

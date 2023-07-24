@@ -1,7 +1,7 @@
 .dashboard-header{
     display:flex;
     flex-direction:column;
-    height:100vh;
+    /* min-height:100vh; */
     /* position: absolute;
     left: 252px; */
     margin-left: 252px;
@@ -9,9 +9,13 @@
 }
 .dashboard{
     background-color: #F5F7FA;
-    height:100%;
+    /* height:100%; */
     padding: 20px 40px 40px 40px;
     box-sizing: border-box;
+    min-height: 89vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .dashboard-page {
     box-sizing: border-box;
@@ -71,7 +75,16 @@
     font-weight: 600;
     line-height: normal;
     }
-
+    .last-transaction-2 {
+        color: #333B69;
+        font-family: Inter;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin-bottom: 16px;
+        }
+    
 .last-trans-section {
     margin-top: 24px;
     

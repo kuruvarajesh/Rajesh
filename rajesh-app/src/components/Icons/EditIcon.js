@@ -5,6 +5,7 @@ const EditIcon = (props) => (
     width={20}
     height={20}
     fill="none"
+    style={{ cursor: "pointer" }}
     {...props}
   >
     <g clipPath="url(#a)">
