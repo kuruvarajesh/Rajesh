@@ -103,14 +103,53 @@ const getAdminTransactionsTotal = async()=>{
     
 
 }
+const geAdmintLastTransactions = async() =>{
+    const url  = "https://bursting-gelding-24.hasura.app/api/rest/all-transactions?limit=3&offset=0"
+    const options = {
+    method:"GET",
+    headers :{
+        "content-type":"application/json",
+    "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
+    "x-hasura-role":"admin",
+    }}
+    const response = await fetch(url,options)
+   
+    if (response.ok){
+        const data = await response.json()
+        const transactions = data.transactions
+    // console.log(transactions)
+        setTransactions(transactions)
+        setApiStatus("SUCCESS")
+    }
+    else{
+        setApiStatus("ERROR")
+    }
+    
+}
+const getAdminLast7daysTransactions = async() =>{
+    const url  = "https://bursting-gelding-24.hasura.app/api/rest/daywise-totals-7-days"
+    const options = {
+    method:"GET",
+    headers :{
+        "content-type":"application/json",
+    "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
+    "x-hasura-role":"admin",
+    }}
+        const response = await fetch(url,options)
+        const data = await response.json()
+       console.log("7days",data)
+        // const transactions = data.transactions
+        // // console.log(transactions)
+        // setTransactions(transactions)
+}
 
 
 
 useEffect(()=>{
     if (accessToken==="admin"){
-        getLastTransactions()
+        geAdmintLastTransactions()
         getAdminTransactionsTotal()
-        getLast7daysTransactions()
+        getAdminLast7daysTransactions()
     }
    else{
     getLastTransactions()
@@ -158,7 +197,7 @@ const renderLoadingView = () => (
 
     </div>
     <div className='dash-bottom-section'>
-        <p className='last-transaction'>Debit & Credit Overview</p>
+        <p className='last-transaction-2'>Debit & Credit Overview</p>
         <div className='bottom-trans-card'>
             <Barchart />
         </div>

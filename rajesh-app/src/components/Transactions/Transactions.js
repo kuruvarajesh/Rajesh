@@ -7,6 +7,7 @@ import Header from '../Header/Header'
 
 import './Transactions.css'
 import Last3Transactions from '../Dashboard/Last3Transactions'
+import Cookies from 'js-cookie'
 
 const initialTabsdata = [
   { name: 'All Transactions',id:"allTransactions", },
@@ -25,16 +26,27 @@ const Transactions = () => {
     const [activeTab, setActiveTab] = useState("allTransactions")
     const [apiStatus,setApiStates] = useState("LOADING")
 
+    const accessToken = Cookies.get("access_token")
+
 const getAllTransactions = async()=>{
       const url  = "https://bursting-gelding-24.hasura.app/api/rest/all-transactions?limit=15&offset=0"
+      
+      const userHeaders =  {
+        "content-type":"application/json",
+        "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
+        "x-hasura-role":"user",
+        "x-hasura-user-id":"1"
+      }
+      const adminHeaders = {
+        "content-type":"application/json",
+        "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
+        "x-hasura-role":"admin",
+      }
+      
       const options = {
       method:"GET",
-      headers :{
-          "content-type":"application/json",
-      "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
-      "x-hasura-role":"user",
-      "x-hasura-user-id":"1"
-      }}
+      headers : accessToken === "admin"?adminHeaders:userHeaders
+      }
         const response = await fetch(url,options)
       if (response.ok){
         const responseData = await response.json()

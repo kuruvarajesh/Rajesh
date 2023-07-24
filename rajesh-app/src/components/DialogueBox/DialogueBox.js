@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import DialogDeleteIcon from '../Icons/DialogDeleteIcon';
 import DialogCancelIcon from '../Icons/DialogCancelIcon';
 
+import Cookies from 'js-cookie'
+
 import './DialogueBox.css'; 
 
 const DialogueBox = (props) => {
   const [isOpen, setIsOpen] = useState(props.openDialog);
   const [id, setId] = useState('')
-  console.log(props.handleCloseAdd)
+  const accessToken = Cookies.get('access_token')
  
   useEffect(()=>{
     setIsOpen(props.openDialog)
@@ -25,7 +27,9 @@ const DialogueBox = (props) => {
         headers :{
             "content-type":"application/json",
         "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
-        "x-hasura-role":"admin"
+        "x-hasura-role":"user",
+        "x-hasura-user-id":accessToken.toString()
+
         },
         body:JSON.stringify(data)
       }

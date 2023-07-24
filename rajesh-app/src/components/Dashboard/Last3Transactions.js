@@ -69,7 +69,7 @@ const dateObject = (date) =>{
     <ul className='un-list'>
         {props.data.map((last,index)=>(
           <>
-            <li className='list' key={index}>
+            <li className='list' key={last.name}>
               <div className='transaction-user-name'>
                 <div className='trans-icon'>
               {last.type==="debit"? props.user==="admin"?<DebitIconNormal/>:<DebitIcon />: props.user==="admin"? <CreditIconNormal />: <CreditIcon />}

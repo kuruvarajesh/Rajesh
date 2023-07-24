@@ -5,6 +5,7 @@ const LogoutIconDialog = (props) => (
     width={32}
     height={32}
     fill="none"
+    style={{ cursor: "pointer" }}
     {...props}
   >
     <path

@@ -5,6 +5,7 @@ const LogoutIcon = (props) => (
     width={20}
     height={20}
     fill="none"
+    style={{ cursor: "pointer" }}
     {...props}
   >
     <path
