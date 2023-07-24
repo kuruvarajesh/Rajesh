@@ -7,6 +7,9 @@ import Barchart from '../PieChart/Barchart'
 import Last3Transactions from './Last3Transactions'
 import Header from '../Header/Header'
 import NotFound from '../NotFound/NotFound';
+import Sidebar from '../Sidebar/Sidebar';
+
+import Cookies from 'js-cookie'
 
 const Dashboard = (props) => {
     const [apiData,setApiData] = useState([])
@@ -15,6 +18,7 @@ const Dashboard = (props) => {
     const [lastTransactions,setTransactions] = useState([])
     const [data,setData]= useState([])
     const [apiStatus,setApiStatus] = useState("LOADING")
+    const accessToken = Cookies.get("access_token")
 
 const getTransactionsTotal = async()=>{
         const url  = "https://bursting-gelding-24.hasura.app/api/rest/credit-debit-totals"
@@ -24,14 +28,15 @@ const getTransactionsTotal = async()=>{
             "content-type":"application/json",
         "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
         "x-hasura-role":"user",
-        "x-hasura-user-id":"1"
+        "x-hasura-user-id":accessToken.toString()
         }}
         const response = await fetch(url,options)
        
         const data = await response.json()
         const amount = data.totals_credit_debit_transactions
-        setDebit(amount[0].sum)
-        setCredit(amount[1].sum)
+        console.log("amount",amount)
+        setDebit(amount[0]?.sum?amount[0].sum:0)
+        setCredit(amount[1]?.sum?amount[1].sum:0)
         
     
 }
@@ -44,7 +49,7 @@ const getLastTransactions = async() =>{
             "content-type":"application/json",
         "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
         "x-hasura-role":"user",
-        "x-hasura-user-id":"1"
+        "x-hasura-user-id":accessToken.toString()
         }}
         const response = await fetch(url,options)
        
@@ -69,20 +74,49 @@ const getLast7daysTransactions = async() =>{
         "content-type":"application/json",
     "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
     "x-hasura-role":"user",
-    "x-hasura-user-id":"1"
+    "x-hasura-user-id":accessToken.toString()
     }}
         const response = await fetch(url,options)
         const data = await response.json()
-       
+       console.log("7days",data)
         // const transactions = data.transactions
         // // console.log(transactions)
         // setTransactions(transactions)
 }
 
+const getAdminTransactionsTotal = async()=>{
+    const url  = "https://bursting-gelding-24.hasura.app/api/rest/transaction-totals-admin"
+    const options = {
+    method:"GET",
+    headers :{
+        "content-type":"application/json",
+    "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
+    "x-hasura-role":"admin",
+    }}
+    const response = await fetch(url,options)
+   
+    const data = await response.json()
+    console.log("admin",data)
+    const amount = data.transaction_totals_admin
+    setDebit(amount[0].sum)
+    setCredit(amount[1].sum)
+    
+
+}
+
+
+
 useEffect(()=>{
+    if (accessToken==="admin"){
+        getLastTransactions()
+        getAdminTransactionsTotal()
+        getLast7daysTransactions()
+    }
+   else{
     getLastTransactions()
     getTransactionsTotal()
     getLast7daysTransactions()
+   }
    
 },[])
 
@@ -119,7 +153,7 @@ const renderLoadingView = () => (
     <div className='last-trans-section'>
     <p className='last-transaction'>Last Transaction</p>
     <div className='last-trans-card'>
-    <Last3Transactions data = {lastTransactions} isUser={true}/>
+    {lastTransactions.length>0?<Last3Transactions data = {lastTransactions} isUser={true}/>:<p>No Data Available</p>}
     </div>
 
     </div>
@@ -144,6 +178,8 @@ const getDashBoardPageData = () =>{
 }
 
   return (
+    <>
+    <Sidebar />
    <div className='dashboard-header'>
     <Header header={"Accounts"} tabsOpen={false}/>
     <div className='dashboard'>
@@ -152,6 +188,7 @@ const getDashBoardPageData = () =>{
     
     </div>
     </div>
+    </>
   )
 }
 

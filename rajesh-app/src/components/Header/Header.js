@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import AddTransactionIcon from '../Icons/AddTransactionIcon'
 import './Header.css'
-import DialogueBox from '../DialogueBox/DialogueBox';
 import AddTransaction from '../DialogueBox/AddTransaction';
-import UpdateTransaction from '../DialogueBox/UpdateTransaction';
+
+import Cookies from 'js-cookie'
 
 
 
 const Header = (props) => {
     const {header,tabsData } = props
+    const accessToken = Cookies.get("access_token")
     // const [activeTab, setActiveTab] = useState();
     const [addTransaction,setAddTransaction] = useState(false)
     
@@ -30,10 +31,10 @@ const Header = (props) => {
         <div className='header-top'>
             <h1 className='header-heading'>{header}</h1>
        
-        <div>
+        { accessToken !=="admin" &&<div>
             <button className='add-trans' onClick={handleOpenAdd}> <AddTransactionIcon />  Add Transactions</button>
             <AddTransaction openDialog={addTransaction} handleCloseAdd={handleCloseAdd}/>
-        </div>
+        </div>}
         </div>
         {tabsData?  (
         <div className="tabs-container">  

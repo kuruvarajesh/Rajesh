@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router';
 import DialogCancelIcon from '../Icons/DialogCancelIcon';
 import LogoutIconDialog from '../Icons/LogoutIconDialog';
+
 import './DialogueBox.css'; 
 
 const LogoutDialog = (props) => {
   const [isOpen, setIsOpen] = useState(props.openDialog);
+  const navigate = useNavigate()
  
   useEffect(()=>{
     setIsOpen(props.openDialog)
@@ -14,6 +18,11 @@ const LogoutDialog = (props) => {
     setIsOpen(false);
     props.handleCloseAdd(false)
   };
+
+  const handleLogout = () =>{
+      Cookies.remove("access_token")
+      navigate("/login")
+  }
 
   return (
     
@@ -34,7 +43,7 @@ const LogoutDialog = (props) => {
             <p className='dialog-para'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
             </div>
             <div className='buttons'>
-            <button onClick={handleClose} className='button delete-button'>Yes, Logout</button>
+            <button onClick={handleLogout} className='button delete-button'>Yes, Logout</button>
             <button onClick={handleClose} className='button leave-button' >Cancel</button>
             </div>
             </div>

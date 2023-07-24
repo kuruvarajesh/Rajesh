@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react' 
 import { TailSpin } from "react-loader-spinner";
 import NotFound from '../NotFound/NotFound';
+import Sidebar from '../Sidebar/Sidebar';
 
 import Header from '../Header/Header'
 
@@ -32,7 +33,7 @@ const getAllTransactions = async()=>{
           "content-type":"application/json",
       "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
       "x-hasura-role":"user",
-      "x-hasura-user-id":""
+      "x-hasura-user-id":"1"
       }}
         const response = await fetch(url,options)
       if (response.ok){
@@ -106,12 +107,16 @@ const renderView = () =>{
 }
 
   return (
+    <>
+    <Sidebar />
     <div className='transactions-header'>
       <Header header={"Transactions"} tabsData={tabsData} handleTabChange = {handleTransTab} activeTab={activeTab} />
       <div className='transactions'>
       {renderView()}
       </div>
     </div>
+    </>
+
   )
 }
 

@@ -14,7 +14,6 @@ import './Sidebar.css'
 
 
 const Sidebar = (props) => {
-  console.log(props)
   const [logout,setLogout] = useState(false)
   const handleLogout = ()=>{
     setLogout(true)
