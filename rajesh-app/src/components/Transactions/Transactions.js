@@ -24,7 +24,7 @@ const Transactions = () => {
     const [apiStatus,setApiStates] = useState("LOADING")
 
 const getAllTransactions = async()=>{
-      const url  = "https://bursting-gelding-24.hasura.app/api/rest/all-transactions?limit=10&offset=0"
+      const url  = "https://bursting-gelding-24.hasura.app/api/rest/all-transactions?limit=15&offset=0"
       const options = {
       method:"GET",
       headers :{
@@ -81,7 +81,7 @@ const renderTransactionsView = () =>(
       </li>
     </ul>
     <hr className='hr-line'/>
-          <Last3Transactions data={activeTab==="allTransactions"?allTransactions:activeTab==="debit"?debitTransData:creditTransData} user={"admin"}/>
+          <Last3Transactions data={activeTab==="allTransactions"?allTransactions:activeTab==="debit"?debitTransData:creditTransData} isUser={true}/>
         </div>
 )
 
@@ -98,7 +98,7 @@ const renderView = () =>{
 
   return (
     <div className='transactions-header'>
-      <Header header={"Transactions"} tabsData={tabsData} handleTabChange = {handleTransTab} activeTab={activeTab}/>
+      <Header header={"Transactions"} tabsData={tabsData} handleTabChange = {handleTransTab} activeTab={activeTab} />
       <div className='transactions'>
       {renderView()}
       </div>

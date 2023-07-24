@@ -47,7 +47,7 @@ const Sidebar = (props) => {
             <p className='rhye-email'>olivia@untitledui.com</p>
            </div>
            <LogoutIcon onClick={handleLogout}/>
-           <DialogueBox openDialog={logout} handleCloseAdd={handleCloseLogout}/>
+           <LogoutDialog openDialog={logout} handleCloseAdd={handleCloseLogout}/>
         </div>
     </div>
     

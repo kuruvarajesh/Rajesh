@@ -9,8 +9,9 @@ const AddTransaction = (props) => {
   const [date,setDate] = useState('')
   const [category,setCategory] = useState('')
   const [type, setType] = useState('')
+  const [transactiontype,setTransactiontype] = useState('')
 
-  const getAddTransactionData = async() => {
+  const addTransactionData = async() => {
             const url  = "https://bursting-gelding-24.hasura.app/api/rest/add-transaction"
             const addData = {
               "name": name,
@@ -31,12 +32,41 @@ const AddTransaction = (props) => {
             body: JSON.stringify(addData)
           }
             const response = await fetch(url,options)
-            const responseData = await response.json()
-            // console.log(responseData)
   }
+  const updateTransactionData = async() => {
+    const url = "https://bursting-gelding-24.hasura.app/api/rest/update-transaction"
+    const data = {
+      "id": props.updateData.id,
+      "name": name,
+      "type": type,
+      "category": category,
+      "amount": amount,
+      "date": date
+  }
+    const options = {
+        method:"POST",
+        headers :{
+            "content-type":"application/json",
+        "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
+        "x-hasura-role":"admin"
+        },
+        body:JSON.stringify(data)
+      }
+        const response = await fetch(url,options)
+        const responseData = await response.json()
+        // console.log(responseData)
+}
 
   useEffect(()=>{
     setIsOpen(props.openDialog)
+    setTransactiontype(props.transactiontype?props.transactiontype:'')
+    if(props.transactiontype){
+      setName(props.updateData.transaction_name)
+      setCategory(props.updateData.category)
+      setAmount(props.updateData.amount)
+      setDate(props.updateData.date)
+      setType(props.updateData.type)
+    }
   },[props.openDialog])
 
 //   useEffect(()=>{
@@ -50,7 +80,13 @@ const AddTransaction = (props) => {
 
 const handleAddTransaction = (event)=>{
     event.preventDefault()
-    getAddTransactionData()
+    if (transactiontype){
+      updateTransactionData()
+    }
+    else{
+      addTransactionData()
+    }
+    
    
 
 }
@@ -135,7 +171,7 @@ const handleAddTransaction = (event)=>{
 
   return (  
       isOpen && (
-        <div className="add-container">
+        <div className={transactiontype?"update-container":"add-container"}>
           <div className="add-content">
             <div className='add-card'>
             <div className='add-text-card'>

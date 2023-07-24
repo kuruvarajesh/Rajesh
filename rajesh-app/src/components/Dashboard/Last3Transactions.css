@@ -21,10 +21,10 @@
     display:flex;
     justify-content:space-between; 
     align-items:center;
-    width:245px;
+    width:220px;
 }
 .trans-icon {
-    margin-right: 24px;
+    margin-right: 20px;
 }
 .trans-user{
     margin-right: 8px;
@@ -60,4 +60,13 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+}
+.edit-delete{
+    gap: 20px;
+    display: flex;
+    background: transparent;
+}
+.edit-delete-buttons{
+    background-color: transparent;
+    border: none;
 }
