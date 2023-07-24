@@ -19,7 +19,6 @@ const Last3Transactions = (props) => {
    const [deleteTrans, setDeleteTrans] = useState(false)
    const [updateData, setUpdateData]  = useState('')
    const [deleteTansId, setDeleteTransId] = useState('')
-   console.log(props.data)
 
    const accessToken = Cookies.get("access_token")
   //  const getTabData = ()=>{
@@ -39,7 +38,6 @@ const Last3Transactions = (props) => {
 
   const handleDeleteTransaction = (id) => {
     setDeleteTrans(true)
-    console.log("...",id)
     setDeleteTransId(id)
   }
   

@@ -35,7 +35,6 @@ const DialogueBox = (props) => {
       }
         const response = await fetch(url,options)
         const responseData = await response.json()
-        // console.log(responseData)
 }
 
   const handleClose = () => {

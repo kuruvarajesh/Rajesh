@@ -34,7 +34,6 @@ const getTransactionsTotal = async()=>{
        
         const data = await response.json()
         const amount = data.totals_credit_debit_transactions
-        console.log("amount",amount)
         setDebit(amount[0]?.sum?amount[0].sum:0)
         setCredit(amount[1]?.sum?amount[1].sum:0)
         
@@ -56,7 +55,7 @@ const getLastTransactions = async() =>{
         if (response.ok){
             const data = await response.json()
             const transactions = data.transactions
-        // console.log(transactions)
+       
             setTransactions(transactions)
             setApiStatus("SUCCESS")
         }
@@ -78,9 +77,8 @@ const getLast7daysTransactions = async() =>{
     }}
         const response = await fetch(url,options)
         const data = await response.json()
-       console.log("7days",data)
+      
         // const transactions = data.transactions
-        // // console.log(transactions)
         // setTransactions(transactions)
 }
 
@@ -96,7 +94,6 @@ const getAdminTransactionsTotal = async()=>{
     const response = await fetch(url,options)
    
     const data = await response.json()
-    console.log("admin",data)
     const amount = data.transaction_totals_admin
     setDebit(amount[0].sum)
     setCredit(amount[1].sum)
@@ -117,7 +114,6 @@ const geAdmintLastTransactions = async() =>{
     if (response.ok){
         const data = await response.json()
         const transactions = data.transactions
-    // console.log(transactions)
         setTransactions(transactions)
         setApiStatus("SUCCESS")
     }
@@ -137,9 +133,7 @@ const getAdminLast7daysTransactions = async() =>{
     }}
         const response = await fetch(url,options)
         const data = await response.json()
-       console.log("7days",data)
         // const transactions = data.transactions
-        // // console.log(transactions)
         // setTransactions(transactions)
 }
 

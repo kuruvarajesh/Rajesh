@@ -55,7 +55,6 @@ const getAllTransactions = async()=>{
 
         const debitData = allTransactionsData.filter((data)=> data.type==="debit")
         const creditData = allTransactionsData.filter((data)=> data.type==="credit")
-        // console.log("R",allTransactionsData)
 
 
         setAllTransactions(allTransactionsData)
