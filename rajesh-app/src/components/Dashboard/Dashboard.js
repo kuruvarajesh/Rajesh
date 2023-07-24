@@ -6,6 +6,7 @@ import './Dashboard.css'
 import Barchart from '../PieChart/Barchart'
 import Last3Transactions from './Last3Transactions'
 import Header from '../Header/Header'
+import NotFound from '../NotFound/NotFound';
 
 const Dashboard = (props) => {
     const [apiData,setApiData] = useState([])
@@ -26,6 +27,7 @@ const getTransactionsTotal = async()=>{
         "x-hasura-user-id":"1"
         }}
         const response = await fetch(url,options)
+       
         const data = await response.json()
         const amount = data.totals_credit_debit_transactions
         setDebit(amount[0].sum)
@@ -45,12 +47,18 @@ const getLastTransactions = async() =>{
         "x-hasura-user-id":"1"
         }}
         const response = await fetch(url,options)
-        const data = await response.json()
-
-        const transactions = data.transactions
+       
+        if (response.ok){
+            const data = await response.json()
+            const transactions = data.transactions
         // console.log(transactions)
-        setTransactions(transactions)
-        setApiStatus("SUCCESS")
+            setTransactions(transactions)
+            setApiStatus("SUCCESS")
+        }
+        else{
+            setApiStatus("ERROR")
+        }
+        
 }
 
 const getLast7daysTransactions = async() =>{
@@ -130,6 +138,8 @@ const getDashBoardPageData = () =>{
             return renderDashBoardPage()
         case "LOADING":
             return renderLoadingView()
+        case "ERROR":
+            return <NotFound text={"API Failed"}/>
     }
 }
 

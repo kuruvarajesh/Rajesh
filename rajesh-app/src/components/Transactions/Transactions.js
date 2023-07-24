@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react' 
 import { TailSpin } from "react-loader-spinner";
+import NotFound from '../NotFound/NotFound';
 
 import Header from '../Header/Header'
 
@@ -31,9 +32,10 @@ const getAllTransactions = async()=>{
           "content-type":"application/json",
       "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
       "x-hasura-role":"user",
-      "x-hasura-user-id":"1"
+      "x-hasura-user-id":""
       }}
         const response = await fetch(url,options)
+      if (response.ok){
         const responseData = await response.json()
         
         const allTransactionsData = responseData.transactions
@@ -47,6 +49,11 @@ const getAllTransactions = async()=>{
         setDebitTransData(debitData)
         setCreditTransData(creditData)
         setApiStates("SUCCESS")
+      }
+      else{
+        setApiStates("ERROR")
+      }
+       
         
     
 }
@@ -91,6 +98,8 @@ const renderView = () =>{
       return renderLoadingView()
       case 'SUCCESS':
         return renderTransactionsView()
+      case "ERROR":
+        return <NotFound text={"API Configuration Failed"} />
       default:
         return null
   }
