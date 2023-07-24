@@ -211,7 +211,7 @@ const handleAddTransaction = (event)=>{
             {renderAmount()}
             {renderDate()}
             <div className='buttons'>
-            <button  className='add-trans-button' type='submit' >Add Transaction</button>
+            {props.transactiontype==="update"?<button  className='add-trans-button' type='submit' >Update Transaction</button>:<button  className='add-trans-button' type='submit' >Add Transaction</button>}
             
          
             </div>
