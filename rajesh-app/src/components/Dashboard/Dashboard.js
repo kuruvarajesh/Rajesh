@@ -111,7 +111,7 @@ const renderLoadingView = () => (
     <div className='last-trans-section'>
     <p className='last-transaction'>Last Transaction</p>
     <div className='last-trans-card'>
-    <Last3Transactions data = {lastTransactions} user="user"/>
+    <Last3Transactions data = {lastTransactions} isUser={true}/>
     </div>
 
     </div>

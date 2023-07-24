@@ -6,21 +6,50 @@ import './DialogueBox.css';
 
 const DialogueBox = (props) => {
   const [isOpen, setIsOpen] = useState(props.openDialog);
+  const [id, setId] = useState('')
+  console.log(props.handleCloseAdd)
  
   useEffect(()=>{
     setIsOpen(props.openDialog)
+    setId(props.id)
+
   },[props.openDialog])
 
+  const deleteTransaction = async() => {
+    const url = "https://bursting-gelding-24.hasura.app/api/rest/delete-transaction"
+    const data = {
+      "id": id,
+    }
+    const options = {
+        method:"DELETE",
+        headers :{
+            "content-type":"application/json",
+        "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
+        "x-hasura-role":"admin"
+        },
+        body:JSON.stringify(data)
+      }
+        const response = await fetch(url,options)
+        const responseData = await response.json()
+        // console.log(responseData)
+}
+
   const handleClose = () => {
+    console.log("Clicked")
     setIsOpen(false);
     props.handleCloseAdd(false)
   };
+
+  const handleDeleteTransaction = () => {
+    deleteTransaction()
+    props.handleCloseAdd(false)
+  }
 
   return (
     
       
       isOpen && (
-        <div className="dialog-container">
+        <div className="update-container">
           <div className='dialog-content'>
 
          
@@ -35,7 +64,7 @@ const DialogueBox = (props) => {
             <p className='dialog-para'>The transaction will be deleted immediately, You can't undo this action.</p>
             </div>
             <div className='buttons'>
-            <button onClick={handleClose} className='button delete-button'>Yes, Delete</button>
+            <button onClick={handleDeleteTransaction} className='button delete-button'>Yes, Delete</button>
             <button onClick={handleClose} className='button leave-button' >No, Leave</button>
             </div>
             </div>
