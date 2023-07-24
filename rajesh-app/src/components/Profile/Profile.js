@@ -4,6 +4,7 @@ import Header from '../Header/Header'
 import ProfileDetails from './ProfileDetails'
 
 import './Profile.css'
+import Sidebar from '../Sidebar/Sidebar';
 
 const Profile = () => {
     const [profileData,setProfileData] = useState({})
@@ -23,7 +24,6 @@ const Profile = () => {
             const responseData = await response.json()
           
             const data  = responseData.users[0]
-            console.log("===>",data)
             setProfileData(data)
             setApiStatus("SUCCESS")
     }
@@ -55,12 +55,15 @@ const getProfilePageData = () =>{
 }
 
   return (
+    <>
+    <Sidebar />
     <div className='profile-header'>
     <Header header={"Profile"} />
     <div className='profile'>
       {getProfilePageData()}
     </div>
   </div>
+  </>
   )
 }
 

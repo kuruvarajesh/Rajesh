@@ -42,7 +42,7 @@ const data = [
 const Barchart = (props)=>{
  
     return (
-      <ResponsiveContainer width={1000} height={364} >
+      <ResponsiveContainer width={"100%"} height={364} >
         <BarChart
           width={500}
           height={300}
@@ -56,9 +56,21 @@ const Barchart = (props)=>{
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <YAxis  />
+          <YAxis  
+            tickCount={5}
+            tick={{
+              stroke: "gray",
+              strokeWidth: 0,
+            }}
+            ticks={[100, 200, 300, 400, 500]}/>
           <Tooltip />
-          <Legend />
+          <Legend  
+          content={"hello nlaewn wjr jr'ilwj wrj ioqwr' r'oih 'iof'w4 'o4w rhrowjr'owjf'oewhf;awonv;iaehg oaegaeri;ghiaeroah"}
+            layout="horizontal" // Change the layout to horizontal to display the legend items in a row
+            verticalAlign="top" // Position the legend at the top of the chart
+            align="right" // Align the legend items to the center
+             />
+             <CartesianGrid vertical={false} /> {/* Set vertical prop to false */}
           <Bar dataKey="Debit" stackId="a" fill="#4D78FF" />
           <Bar dataKey="Credit" fill="#FCAA0B" />
         </BarChart>

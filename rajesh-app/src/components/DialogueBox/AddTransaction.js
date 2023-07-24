@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import DialogCancelIcon from '../Icons/DialogCancelIcon';
 import './AddTransaction.css'; 
 
+import { TRANSACTION_CATEGORY_TYPE } from '../../constants';
+import { TRANSACTION_NAMES_TYPE } from '../../constants';
+import Cookies from 'js-cookie'
+
 const AddTransaction = (props) => {
   const [isOpen, setIsOpen] = useState(props.openDialog);
   const [name,setName] = useState('')
@@ -10,6 +14,9 @@ const AddTransaction = (props) => {
   const [category,setCategory] = useState('')
   const [type, setType] = useState('')
   const [transactiontype,setTransactiontype] = useState('')
+
+  const accessToken = Cookies.get("access_token")
+ 
 
   const addTransactionData = async() => {
             const url  = "https://bursting-gelding-24.hasura.app/api/rest/add-transaction"
@@ -27,7 +34,7 @@ const AddTransaction = (props) => {
                 "content-type":"application/json",
             "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
             "x-hasura-role":"user",
-            "x-hasura-user-id":"1"
+            "x-hasura-user-id":accessToken.toString()
             },
             body: JSON.stringify(addData)
           }
@@ -48,14 +55,26 @@ const AddTransaction = (props) => {
         headers :{
             "content-type":"application/json",
         "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
-        "x-hasura-role":"admin"
+        "x-hasura-role":"user",
+        "x-hasura-user-id":accessToken.toString()
         },
         body:JSON.stringify(data)
       }
         const response = await fetch(url,options)
         const responseData = await response.json()
+  
         // console.log(responseData)
 }
+
+// const dateObject = (date) =>{
+//   const dateObj = new Date(date);
+//   const year = dateObj.getFullYear();
+//   const day = dateObj.getDate();
+//   const month = dateObj.getMonth();
+//   const formattedDateAndTime = `${day}/${month > 9? month:"0"+month }/${year}`; 
+//   return formattedDateAndTime
+// }
+
 
   useEffect(()=>{
     setIsOpen(props.openDialog)
@@ -64,8 +83,9 @@ const AddTransaction = (props) => {
       setName(props.updateData.transaction_name)
       setCategory(props.updateData.category)
       setAmount(props.updateData.amount)
-      setDate(props.updateData.date)
       setType(props.updateData.type)
+      // const formatDate = dateObject(props.updateData.date)
+      setDate(props.updateData.date)
     }
   },[props.openDialog])
 
@@ -82,9 +102,11 @@ const handleAddTransaction = (event)=>{
     event.preventDefault()
     if (transactiontype){
       updateTransactionData()
+      props.handleCloseAdd(false)
     }
     else{
       addTransactionData()
+      props.handleCloseAdd(false)
     }
     
    
@@ -133,8 +155,10 @@ const handleAddTransaction = (event)=>{
             value={type}
             onChange={handleTransactionType}
           >
-            <option value='debit'>Debit</option>
-            <option value='credit'>Credit</option>
+            <option key={"initial "} value="">Select Type</option>
+            {TRANSACTION_NAMES_TYPE.map((items)=>(
+              <option key={items.value} value={items.value}>{items.label}</option>
+            ))}
           </select>
     </div>
   )
@@ -144,14 +168,13 @@ const handleAddTransaction = (event)=>{
       <select className='input-element'
             id='category'
             name='category'
-            value={category}
+            value={category?category:"mobiles"}
             onChange={handleCategory}
           >
-            <option value='shopping'>Shopping</option>
-            <option value='food'>Food</option>
-            <option value='grocery'>Grocery</option>
-            <option value='mobiles'>Mobiles</option>
-            <option value='sports'>Sports</option>
+            <option key={"initial "} value="">Select Category</option>
+            {TRANSACTION_CATEGORY_TYPE.map((item)=>(
+              <option key={item.value} value={item.value}>{item.label}</option>
+            ))}
 
           </select>
     </div>
@@ -176,10 +199,11 @@ const handleAddTransaction = (event)=>{
             <div className='add-card'>
             <div className='add-text-card'>
             <div className='trans-cancel-container'>
-            <p className='add-head'>Add Transaction</p>
+            
+            {props.transactiontype==="update"?<p className='add-head'>Update Transaction</p>:<p className='add-head'>Add Transaction</p>}
             <DialogCancelIcon onClick={handleClose}/>
             </div>
-            <p className='add-para'>Lorem ipsum dolor sit amet, consectetur.</p>
+            {props.transactiontype==="update"?  <p className='add-para'> You can update your transaction here.</p>:  <p className='add-para'>Lorem ipsum dolor sit amet, consectetur.</p>}
             </div>
             <form onSubmit={handleAddTransaction}>
             {renderName()}

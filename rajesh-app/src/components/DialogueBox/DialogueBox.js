@@ -35,7 +35,6 @@ const DialogueBox = (props) => {
 }
 
   const handleClose = () => {
-    console.log("Clicked")
     setIsOpen(false);
     props.handleCloseAdd(false)
   };

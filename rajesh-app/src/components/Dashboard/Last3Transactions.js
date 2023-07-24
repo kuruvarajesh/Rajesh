@@ -6,9 +6,10 @@ import EditIcon from '../Icons/EditIcon'
 import DebitIconNormal from '../Icons/DebitIconNormal'
 import CreditIconNormal from '../Icons/CreditIconNormal'
 import last3User from '../Images/last3User.png'
-import UpdateTransaction from '../DialogueBox/UpdateTransaction'
 import AddTransaction from '../DialogueBox/AddTransaction'
 import DialogueBox from '../DialogueBox/DialogueBox'
+
+import Cookies from 'js-cookie'
 
 import './Last3Transactions.css'
 
@@ -18,6 +19,9 @@ const Last3Transactions = (props) => {
    const [deleteTrans, setDeleteTrans] = useState(false)
    const [updateData, setUpdateData]  = useState('')
    const [deleteTansId, setDeleteTransId] = useState('')
+   console.log(props.data)
+
+   const accessToken = Cookies.get("access_token")
   //  const getTabData = ()=>{
   //     if(props.user==="admin"){
   //       const adminData = 
@@ -70,14 +74,14 @@ const dateObject = (date) =>{
                 <div className='trans-icon'>
               {last.type==="debit"? props.user==="admin"?<DebitIconNormal/>:<DebitIcon />: props.user==="admin"? <CreditIconNormal />: <CreditIcon />}
               </div>
-              {!props.isUser && <img src={last3User} alt="user" className='trans-user'/>}
+              {accessToken === "admin" && <img src={last3User} alt="user" className='trans-user'/>}
               <p className='trans-desc'>Arlene McCoy</p>
               </div>
               <p className='trans-desc'>{last.transaction_name}</p>
               <p className='trans-desc'>{last.category}</p>
               <p className='trans-desc'>{dateObject(last.date)}</p>
               <p className={last.type==="debit"?"l-debit-amount":"l-credit-amount"}>{last.amount}</p>
-              {props.isUser && <div className='edit-delete'>
+              {accessToken !== "admin" && <div className='edit-delete'>
                 <button className='edit-delete-buttons' onClick={()=>handleUpdateTransaction(last,last.id)}> <EditIcon /></button>
                 <AddTransaction openDialog={updateTrans} updateData={updateData} transactiontype={"update"} handleCloseAdd={handleCloseAdd}/>
                 <button className='edit-delete-buttons' onClick={()=>handleDeleteTransaction(last.id)}><DeleteIcon /></button>
