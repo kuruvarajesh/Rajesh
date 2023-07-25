@@ -8,8 +8,6 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import {HOME_ROUTE_PATH,TRANSACTIONS_ROUTE_PATH, PROFILE_ROUTE_PATH } from './constants';
 
 const App = () => {
-  // Check if the user is authenticated (you can implement this logic according to your authentication mechanism)
-  const isAuthenticated = true; // Set this to true if the user is authenticated, otherwise, set it to false
 
   return (
     <BrowserRouter>
@@ -20,7 +18,6 @@ const App = () => {
             <Route exact path={PROFILE_ROUTE_PATH} element={<Profile />} />
          </Route>
         <Route path="/login" element={<LoginForm />} />
-        {/* <ProtectedRoute path="/" element={<Dashboard />}  /> */}
       </Routes>
     </BrowserRouter>
   );

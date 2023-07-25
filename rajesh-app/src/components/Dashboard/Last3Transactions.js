@@ -21,15 +21,6 @@ const Last3Transactions = (props) => {
    const [deleteTansId, setDeleteTransId] = useState('')
 
    const accessToken = Cookies.get("access_token")
-  //  const getTabData = ()=>{
-  //     if(props.user==="admin"){
-  //       const adminData = 
-  //     }
-  //  }
-
-  //  useEffect(()=>{
-  //   getTabData()
-  //  },[])
 
   const handleUpdateTransaction =(trans,id)=> {
     setUpdateTrans(true)

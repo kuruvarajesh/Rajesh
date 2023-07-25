@@ -10,7 +10,6 @@ import Cookies from 'js-cookie'
 const Header = (props) => {
     const {header,tabsData } = props
     const accessToken = Cookies.get("access_token")
-    // const [activeTab, setActiveTab] = useState();
     const [addTransaction,setAddTransaction] = useState(false)
     
     const handleTabClick = (tabName) => {
