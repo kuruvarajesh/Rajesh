@@ -62,20 +62,6 @@ const LoginForm = () => {
      else{
       onSubmitFailure()
      }
-     
-
-     //const url = "https://bursting-gelding-24.hasura.app/api/rest/get-user-id"
-     //   const isUserMatched = USERS_LOGIN_CREDITS.find(
-     //     (user) => user.username === username && user.password === password
-     //   );
-     //   const isAdmin = (ADMIN_LOGIN_CREDITS.username===username) && (ADMIN_LOGIN_CREDITS.password===password)
- 
-     //   if (isAdmin){
-     //     renderAdminApp()
-     //  }
-     //  else if(isUserMatched){
-     //     renderUserApp()
-     //  }
     }
   
     const renderPasswordField = () => {
