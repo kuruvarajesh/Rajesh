@@ -15,7 +15,7 @@ const AddTransaction = (props) => {
   const [type, setType] = useState('')
   const [transactiontype,setTransactiontype] = useState('')
 
-  const accessToken = Cookies.get("access_token")
+  const accessToken = parseInt(Cookies.get("access_token"))
  
 
   const addTransactionData = async() => {

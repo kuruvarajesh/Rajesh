@@ -18,7 +18,7 @@ const Dashboard = (props) => {
     const [lastTransactions,setTransactions] = useState([])
     const [data,setData]= useState([])
     const [apiStatus,setApiStatus] = useState("LOADING")
-    const accessToken = Cookies.get("access_token")
+    const accessToken = parseInt(Cookies.get("access_token"))
 
 const getTransactionsTotal = async()=>{
         const url  = "https://bursting-gelding-24.hasura.app/api/rest/credit-debit-totals"
@@ -140,7 +140,7 @@ const getAdminLast7daysTransactions = async() =>{
 
 
 useEffect(()=>{
-    if (accessToken==="admin"){
+    if (accessToken===3){
         geAdmintLastTransactions()
         getAdminTransactionsTotal()
         getAdminLast7daysTransactions()

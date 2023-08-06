@@ -26,7 +26,7 @@ const Transactions = () => {
     const [activeTab, setActiveTab] = useState("allTransactions")
     const [apiStatus,setApiStates] = useState("LOADING")
 
-    const accessToken = Cookies.get("access_token")
+    const accessToken = parseInt(Cookies.get("access_token"))
 
 const getAllTransactions = async()=>{
       const url  = "https://bursting-gelding-24.hasura.app/api/rest/all-transactions?limit=15&offset=0"
@@ -45,7 +45,7 @@ const getAllTransactions = async()=>{
       
       const options = {
       method:"GET",
-      headers : accessToken === "admin"?adminHeaders:userHeaders
+      headers : accessToken === 3?adminHeaders:userHeaders
       }
         const response = await fetch(url,options)
       if (response.ok){
