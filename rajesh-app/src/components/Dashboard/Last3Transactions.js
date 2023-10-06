@@ -20,7 +20,7 @@ const Last3Transactions = (props) => {
    const [updateData, setUpdateData]  = useState('')
    const [deleteTansId, setDeleteTransId] = useState('')
 
-   const accessToken = Cookies.get("access_token")
+   const accessToken = parseInt(Cookies.get("access_token"))
 
   const handleUpdateTransaction =(trans,id)=> {
     setUpdateTrans(true)
@@ -58,23 +58,23 @@ const dateObject = (date) =>{
     <ul className='un-list'>
         {props.data.map((last,index)=>(
           <>
-            <li className='list' key={last.name}>
+            <li className='list' key={index}>
               <div className='transaction-user-name'>
                 <div className='trans-icon'>
               {last.type==="debit"? props.user==="admin"?<DebitIconNormal/>:<DebitIcon />: props.user==="admin"? <CreditIconNormal />: <CreditIcon />}
               </div>
-              {accessToken === "admin" && <img src={last3User} alt="user" className='trans-user'/>}
+              {accessToken === 3 && <img src={last3User} alt="user" className='trans-user'/>}
               <p className='trans-desc'>Arlene McCoy</p>
               </div>
               <p className='trans-desc'>{last.transaction_name}</p>
               <p className='trans-desc'>{last.category}</p>
               <p className='trans-desc'>{dateObject(last.date)}</p>
               <p className={last.type==="debit"?"l-debit-amount":"l-credit-amount"}>{last.amount}</p>
-              {accessToken !== "admin" && <div className='edit-delete'>
+              {accessToken !== 3 && <div className='edit-delete'>
                 <button className='edit-delete-buttons' onClick={()=>handleUpdateTransaction(last,last.id)}> <EditIcon /></button>
-                <AddTransaction openDialog={updateTrans} updateData={updateData} transactiontype={"update"} handleCloseAdd={handleCloseAdd}/>
+                <AddTransaction openDialog={updateTrans} updateData={updateData} transactiontype={"update"} handleCloseAdd={handleCloseAdd} updateLast3Transactions ={props.updateLast3Transactions}/>
                 <button className='edit-delete-buttons' onClick={()=>handleDeleteTransaction(last.id)}><DeleteIcon /></button>
-                <DialogueBox openDialog={deleteTrans} handleCloseAdd={handleCloseDelete} id = {deleteTansId}/>
+                <DialogueBox openDialog={deleteTrans} handleCloseAdd={handleCloseDelete} id = {deleteTansId}  handleDeleteTrans = {props.handleDeleteTrans}/>
               </div>}
             </li>
            {index !== (props.data.length-1) && <hr className='hr-line'/>}

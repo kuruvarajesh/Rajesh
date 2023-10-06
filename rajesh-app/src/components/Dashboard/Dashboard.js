@@ -18,7 +18,9 @@ const Dashboard = (props) => {
     const [lastTransactions,setTransactions] = useState([])
     const [data,setData]= useState([])
     const [apiStatus,setApiStatus] = useState("LOADING")
-    const accessToken = Cookies.get("access_token")
+    const [deletedTransId, setDeletedTransId] = useState("")
+
+    const accessToken = parseInt(Cookies.get("access_token"))
 
 const getTransactionsTotal = async()=>{
         const url  = "https://bursting-gelding-24.hasura.app/api/rest/credit-debit-totals"
@@ -140,7 +142,7 @@ const getAdminLast7daysTransactions = async() =>{
 
 
 useEffect(()=>{
-    if (accessToken==="admin"){
+    if (accessToken===3){
         geAdmintLastTransactions()
         getAdminTransactionsTotal()
         getAdminLast7daysTransactions()
@@ -151,8 +153,32 @@ useEffect(()=>{
     getLast7daysTransactions()
    }
    
-},[])
+},[deletedTransId])
 
+const updateLast3Transactions = updatedData => {
+    const updateNewData = updatedData.update_transactions_by_pk
+    const newData = lastTransactions.map((eachTrans) => {
+        if (eachTrans.id === updateNewData.id){
+            return updateNewData
+        }
+        return eachTrans
+    })
+    let debit  = 0
+    let credit = 0
+    newData.map((trans)=>{
+        if(trans.type==="debit"){
+            debit += trans.amount
+        }
+        else credit += trans.amount
+    })
+    setTransactions(newData)
+    setDebit(debit)
+    setCredit(credit)
+}
+
+const handleDeleteTrans = (removedId) => {
+    setDeletedTransId(removedId.id)
+}
 
 const renderLoadingView = () => (
     <div className="loader-container">
@@ -186,7 +212,7 @@ const renderLoadingView = () => (
     <div className='last-trans-section'>
     <p className='last-transaction'>Last Transaction</p>
     <div className='last-trans-card'>
-    {lastTransactions.length>0?<Last3Transactions data = {lastTransactions} isUser={true}/>:<p>No Data Available</p>}
+    {lastTransactions.length>0?<Last3Transactions data = {lastTransactions} isUser={true} updateLast3Transactions={updateLast3Transactions} handleDeleteTrans = {handleDeleteTrans} />:<p>No Data Available</p>}
     </div>
 
     </div>

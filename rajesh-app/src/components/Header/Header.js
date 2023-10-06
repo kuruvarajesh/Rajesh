@@ -9,7 +9,7 @@ import Cookies from 'js-cookie'
 
 const Header = (props) => {
     const {header,tabsData } = props
-    const accessToken = Cookies.get("access_token")
+    const accessToken = parseInt(Cookies.get("access_token"))
     const [addTransaction,setAddTransaction] = useState(false)
     
     const handleTabClick = (tabName) => {
@@ -30,7 +30,7 @@ const Header = (props) => {
         <div className='header-top'>
             <h1 className='header-heading'>{header}</h1>
        
-        { accessToken !=="admin" &&<div>
+        { accessToken !==3 &&<div>
             <button className='add-trans' onClick={handleOpenAdd}> <AddTransactionIcon />  Add Transactions</button>
             <AddTransaction openDialog={addTransaction} handleCloseAdd={handleCloseAdd}/>
         </div>}

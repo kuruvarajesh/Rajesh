@@ -4,8 +4,6 @@ import Cookies from 'js-cookie'
 import './LoginForm.css'
 import AppLogo from '../Icons/AppLogo';
 
-import { USERS_LOGIN_CREDITS } from '../../constants';
-import { ADMIN_LOGIN_CREDITS } from '../../constants';
 
 const LoginForm = () => {
   let navigate = useNavigate(); 
@@ -22,19 +20,9 @@ const LoginForm = () => {
     const onChangePassword = event => {
       setPassword(event.target.value)
     }
-  
-    const onSubmitSuccess = jwtToken => {
-      Cookies.set('jwt_token', jwtToken, {
-        expires: 30,
-      })
-    }
     
-    const renderUserApp = (id) =>{ 
-        Cookies.set("access_token",id, {expires:2})
-        navigate("/");
-    }
 
-    const renderAdminApp = (id) => {
+    const renderApp = (id) => {
       Cookies.set("access_token",id, {expires:2})
       navigate("/")
     }
@@ -46,22 +34,39 @@ const LoginForm = () => {
   
     const submitForm = async event => {
       event.preventDefault()
-      const userDetails = { username, password }
-      const isUserMatched = USERS_LOGIN_CREDITS.find(
-        (user) => user.username === username && user.password === password
-      );
-      const isAdmin =  ADMIN_LOGIN_CREDITS.find((admin) =>
-          admin.username === username && admin.password === password
-      );
-      if (isAdmin){
-        renderAdminApp(isAdmin.id)
-     }
-     else if(isUserMatched){
-        renderUserApp(isUserMatched.id)
-     }
-     else{
-      onSubmitFailure()
-     }
+      const userDetails = { email:username, password:password }
+      const apiUrl = "https://bursting-gelding-24.hasura.app/api/rest/get-user-id"
+      const url = `${apiUrl}?email=${username}&password=${password}`;
+
+      
+    const options = {
+      method:"POST",
+        headers :{
+          "content-type":"application/json",
+          "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
+      }
+    }
+
+
+    try {
+      const response = await fetch(url, options)
+      const data = await response.json()
+      console.log(data)
+      if (response.ok === true) {
+        if (data.get_user_id.length===0){
+          onSubmitFailure(data.error_msg)
+        }
+        else{
+          renderApp(data.get_user_id[0].id)
+        }
+      } else {
+        onSubmitFailure(data.error_msg)
+      }
+    } catch (error) {
+      console.error('Error while submitting the form:', error)
+    }
+  
+
     }
   
     const renderPasswordField = () => {

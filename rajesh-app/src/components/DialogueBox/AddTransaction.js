@@ -15,7 +15,7 @@ const AddTransaction = (props) => {
   const [type, setType] = useState('')
   const [transactiontype,setTransactiontype] = useState('')
 
-  const accessToken = Cookies.get("access_token")
+  const accessToken = parseInt(Cookies.get("access_token"))
  
 
   const addTransactionData = async() => {
@@ -62,6 +62,8 @@ const AddTransaction = (props) => {
       }
         const response = await fetch(url,options)
         const responseData = await response.json()
+        console.log("...re",responseData)
+        props.updateLast3Transactions(responseData)
   
 }
 
