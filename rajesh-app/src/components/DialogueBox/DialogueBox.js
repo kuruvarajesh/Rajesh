@@ -35,6 +35,8 @@ const DialogueBox = (props) => {
       }
         const response = await fetch(url,options)
         const responseData = await response.json()
+        const deletedId = responseData.delete_transactions_by_pk
+        props.handleDeleteTrans(deletedId)
 }
 
   const handleClose = () => {

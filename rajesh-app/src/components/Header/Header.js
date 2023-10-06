@@ -10,7 +10,6 @@ import Cookies from 'js-cookie'
 const Header = (props) => {
     const {header,tabsData } = props
     const accessToken = parseInt(Cookies.get("access_token"))
-    console.log("...type",typeof(accessToken))
     const [addTransaction,setAddTransaction] = useState(false)
     
     const handleTabClick = (tabName) => {

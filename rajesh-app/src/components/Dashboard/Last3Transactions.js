@@ -58,7 +58,7 @@ const dateObject = (date) =>{
     <ul className='un-list'>
         {props.data.map((last,index)=>(
           <>
-            <li className='list' key={last.name}>
+            <li className='list' key={index}>
               <div className='transaction-user-name'>
                 <div className='trans-icon'>
               {last.type==="debit"? props.user==="admin"?<DebitIconNormal/>:<DebitIcon />: props.user==="admin"? <CreditIconNormal />: <CreditIcon />}
@@ -72,9 +72,9 @@ const dateObject = (date) =>{
               <p className={last.type==="debit"?"l-debit-amount":"l-credit-amount"}>{last.amount}</p>
               {accessToken !== 3 && <div className='edit-delete'>
                 <button className='edit-delete-buttons' onClick={()=>handleUpdateTransaction(last,last.id)}> <EditIcon /></button>
-                <AddTransaction openDialog={updateTrans} updateData={updateData} transactiontype={"update"} handleCloseAdd={handleCloseAdd}/>
+                <AddTransaction openDialog={updateTrans} updateData={updateData} transactiontype={"update"} handleCloseAdd={handleCloseAdd} updateLast3Transactions ={props.updateLast3Transactions}/>
                 <button className='edit-delete-buttons' onClick={()=>handleDeleteTransaction(last.id)}><DeleteIcon /></button>
-                <DialogueBox openDialog={deleteTrans} handleCloseAdd={handleCloseDelete} id = {deleteTansId}/>
+                <DialogueBox openDialog={deleteTrans} handleCloseAdd={handleCloseDelete} id = {deleteTansId}  handleDeleteTrans = {props.handleDeleteTrans}/>
               </div>}
             </li>
            {index !== (props.data.length-1) && <hr className='hr-line'/>}
