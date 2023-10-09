@@ -6,7 +6,6 @@ import TransIcon from '../Icons/TransIcon.js'
 import ProfileIcon from '../Icons/ProfileIcon.js'
 import LogoutIcon from '../Icons/LogoutIcon.js'
 import Avatar from '../Icons/Avatar.png'
-import DialogueBox from '../DialogueBox/DialogueBox'
 import LogoutDialog from '../DialogueBox/LogoutDialog.js'
 import {HOME_ROUTE_PATH,TRANSACTIONS_ROUTE_PATH, PROFILE_ROUTE_PATH } from '../../constants';
 
@@ -25,7 +24,7 @@ const Sidebar = (props) => {
 
   return (
     <div>
-         <div className="sidebar">
+        <div className="sidebar">
             <div className="top-section">
             <AppLogo />
             <h3 className='money'>Money <span className='matters'>Matters</span></h3>
@@ -38,8 +37,7 @@ const Sidebar = (props) => {
             </div>
         </div>
         <hr />
-        <div className="bottom-section">
-           
+        <div className="bottom-section">  
            <img src={Avatar} style={{marginRight:"8px",}} />
            <div className='avatar-details'>
             <h6 className='rhye'>Rhye</h6>
@@ -49,7 +47,6 @@ const Sidebar = (props) => {
            <LogoutDialog openDialog={logout} handleCloseAdd={handleCloseLogout}/>
         </div>
     </div>
-    
     </div>
   )
 }
