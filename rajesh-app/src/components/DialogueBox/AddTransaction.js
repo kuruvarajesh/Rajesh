@@ -9,7 +9,7 @@ import Cookies from 'js-cookie'
 const AddTransaction = (props) => {
   const [isOpen, setIsOpen] = useState(props.openDialog);
   const [name,setName] = useState('')
-  const [amount,setAmount] = useState()
+  const [amount,setAmount] = useState('')
   const [date,setDate] = useState('')
   const [category,setCategory] = useState('')
   const [type, setType] = useState('')
@@ -39,6 +39,16 @@ const AddTransaction = (props) => {
             body: JSON.stringify(addData)
           }
             const response = await fetch(url,options)
+            const responseData = await response.json()
+            console.log("...new res",responseData)
+            props.addNewTransaction(responseData)
+            // setName('')
+            // setAmount('')
+            // setDate('')
+            // setCategory('')
+            // setType('')
+            // setTransactiontype('')
+            
   }
   const updateTransactionData = async() => {
     const url = "https://bursting-gelding-24.hasura.app/api/rest/update-transaction"
@@ -63,7 +73,7 @@ const AddTransaction = (props) => {
         const response = await fetch(url,options)
         const responseData = await response.json()
         console.log("...re",responseData)
-        props.updateLast3Transactions(responseData)
+        props?.updateLast3Transactions(responseData)
   
 }
 

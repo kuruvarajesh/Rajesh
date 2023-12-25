@@ -112,3 +112,11 @@
 .dash-bottom-section{
     margin-top: 32px;
 }
+.no-data{
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+}

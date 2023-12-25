@@ -75,6 +75,47 @@ useEffect(()=>{
   getAllTransactions()
 },[])
 
+const addNewTransaction = (newTrans) => {
+  console.log("...",newTrans)
+  const newAddedData = newTrans.insert_transactions_one
+  console.log(newAddedData)
+  allTransactions.push(newAddedData)
+  const debitData = allTransactions.filter((data)=> data.type==="debit")
+  const creditData = allTransactions.filter((data)=> data.type==="credit")
+  setAllTransactions(allTransactions)
+  setDebitTransData(debitData)
+  setCreditTransData(creditData)
+}
+
+const updateLast3Transactions = updatedData => {
+  const updateNewData = updatedData.update_transactions_by_pk
+  const newData = allTransactions.map((eachTrans) => {
+      if (eachTrans.id === updateNewData.id){
+          return updateNewData
+      }
+      return eachTrans
+  })
+  const debitData = newData.filter((data)=> data.type==="debit")
+  const creditData = newData.filter((data)=> data.type==="credit")
+  
+  setAllTransactions(newData)
+  setDebitTransData(debitData)
+  setCreditTransData(creditData)
+
+}
+
+const handleDeleteTrans = (removedId) => {
+  const newData = allTransactions.filter((eachTrans) => (eachTrans.id !== removedId.id))
+  const debitData = newData.filter((data)=> data.type==="debit")
+  const creditData = newData.filter((data)=> data.type==="credit")
+ 
+  setAllTransactions(newData)
+  setDebitTransData(debitData)
+  setCreditTransData(creditData)
+
+}
+
+
 const handleTransTab = (tabId) => {
 setActiveTab(tabId)
 }
@@ -100,7 +141,7 @@ const renderTransactionsView = () =>(
       </li>
     </ul>
     <hr className='hr-line'/>
-          <Last3Transactions data={activeTab==="allTransactions"?allTransactions:activeTab==="debit"?debitTransData:creditTransData} isUser={true}/>
+          <Last3Transactions data={activeTab==="allTransactions"?allTransactions:activeTab==="debit"?debitTransData:creditTransData} isUser={true} updateLast3Transactions = {updateLast3Transactions} handleDeleteTrans= {handleDeleteTrans} />
         </div>
 )
 
@@ -121,7 +162,7 @@ const renderView = () =>{
     <>
     <Sidebar />
     <div className='transactions-header'>
-      <Header header={"Transactions"} tabsData={tabsData} handleTabChange = {handleTransTab} activeTab={activeTab} />
+      <Header header={"Transactions"} tabsData={tabsData} handleTabChange = {handleTransTab} activeTab={activeTab} addNewTransaction = {addNewTransaction} />
       <div className='transactions'>
       {renderView()}
       </div>

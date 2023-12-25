@@ -72,7 +72,7 @@ const dateObject = (date) =>{
               <p className={last.type==="debit"?"l-debit-amount":"l-credit-amount"}>{last.amount}</p>
               {accessToken !== 3 && <div className='edit-delete'>
                 <button className='edit-delete-buttons' onClick={()=>handleUpdateTransaction(last,last.id)}> <EditIcon /></button>
-                <AddTransaction openDialog={updateTrans} updateData={updateData} transactiontype={"update"} handleCloseAdd={handleCloseAdd} updateLast3Transactions ={props.updateLast3Transactions}/>
+                <AddTransaction openDialog={updateTrans} updateData={updateData} transactiontype={"update"} handleCloseAdd={handleCloseAdd} updateLast3Transactions ={props.updateLast3Transactions} />
                 <button className='edit-delete-buttons' onClick={()=>handleDeleteTransaction(last.id)}><DeleteIcon /></button>
                 <DialogueBox openDialog={deleteTrans} handleCloseAdd={handleCloseDelete} id = {deleteTansId}  handleDeleteTrans = {props.handleDeleteTrans}/>
               </div>}
