@@ -8,6 +8,7 @@ import Last3Transactions from './Last3Transactions'
 import Header from '../Header/Header'
 import NotFound from '../NotFound/NotFound';
 import Sidebar from '../Sidebar/Sidebar';
+import { FetchAPiCalls } from '../../APIServices/FetchApi';
 
 import Cookies from 'js-cookie'
 
@@ -23,17 +24,8 @@ const Dashboard = (props) => {
     const accessToken = parseInt(Cookies.get("access_token"))
 
 const getTransactionsTotal = async()=>{
-        const url  = "https://bursting-gelding-24.hasura.app/api/rest/credit-debit-totals"
-        const options = {
-        method:"GET",
-        headers :{
-            "content-type":"application/json",
-        "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
-        "x-hasura-role":"user",
-        "x-hasura-user-id":accessToken.toString()
-        }}
-        const response = await fetch(url,options)
-       
+        const url  = "/api/rest/credit-debit-totals"
+        const response = await FetchAPiCalls.fetchUserData(url,"GET")
         const data = await response.json()
         const amount = data.totals_credit_debit_transactions
         setDebit(amount[0]?.sum?amount[0].sum:0)
@@ -43,16 +35,8 @@ const getTransactionsTotal = async()=>{
 }
 
 const getLastTransactions = async() =>{
-        const url  = "https://bursting-gelding-24.hasura.app/api/rest/all-transactions?limit=3&offset=0"
-        const options = {
-        method:"GET",
-        headers :{
-            "content-type":"application/json",
-        "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
-        "x-hasura-role":"user",
-        "x-hasura-user-id":accessToken.toString()
-        }}
-        const response = await fetch(url,options)
+        const url  = "/api/rest/all-transactions?limit=3&offset=0"
+        const response = await FetchAPiCalls.fetchUserData(url,"GET")
        
         if (response.ok){
             const data = await response.json()
@@ -68,16 +52,8 @@ const getLastTransactions = async() =>{
 }
 
 const getLast7daysTransactions = async() =>{
-    const url  = "https://bursting-gelding-24.hasura.app/api/rest/daywise-totals-7-days"
-    const options = {
-    method:"GET",
-    headers :{
-        "content-type":"application/json",
-    "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
-    "x-hasura-role":"user",
-    "x-hasura-user-id":accessToken.toString()
-    }}
-        const response = await fetch(url,options)
+    const url  = "/api/rest/daywise-totals-7-days"
+        const response = await FetchAPiCalls.fetchUserData(url,"GET")
         const data = await response.json()
       
         // const transactions = data.transactions

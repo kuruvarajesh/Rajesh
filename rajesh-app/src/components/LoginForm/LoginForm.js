@@ -23,7 +23,7 @@ const LoginForm = () => {
     
 
     const renderApp = (id) => {
-      Cookies.set("access_token",id, {expires:2})
+      Cookies.set("access_token",id, {expires:2/24})
       navigate("/")
     }
 
