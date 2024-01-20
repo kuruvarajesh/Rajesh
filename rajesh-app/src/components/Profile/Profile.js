@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Cookies from 'js-cookie';
 import { TailSpin } from "react-loader-spinner";
 import Header from '../Header/Header'
 import ProfileDetails from './ProfileDetails'
@@ -12,7 +11,6 @@ import Sidebar from '../Sidebar/Sidebar';
 const Profile = () => {
     const [profileData,setProfileData] = useState({})
     const [apiStatus,setApiStatus] = useState("LOADING")
-    const accessToken = parseInt(Cookies.get("access_token"))   
 
     const getProfileData = async() => {
             const url  = "/api/rest/profile"
