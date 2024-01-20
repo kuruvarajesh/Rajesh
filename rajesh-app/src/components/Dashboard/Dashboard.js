@@ -61,15 +61,8 @@ const getLast7daysTransactions = async() =>{
 }
 
 const getAdminTransactionsTotal = async()=>{
-    const url  = "https://bursting-gelding-24.hasura.app/api/rest/transaction-totals-admin"
-    const options = {
-    method:"GET",
-    headers :{
-        "content-type":"application/json",
-    "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
-    "x-hasura-role":"admin",
-    }}
-    const response = await fetch(url,options)
+    const url  = "/api/rest/transaction-totals-admin"
+    const response = await FetchAPiCalls.fetchAdminData(url)
    
     const data = await response.json()
     const amount = data.transaction_totals_admin
@@ -79,15 +72,8 @@ const getAdminTransactionsTotal = async()=>{
 
 }
 const geAdmintLastTransactions = async() =>{
-    const url  = "https://bursting-gelding-24.hasura.app/api/rest/all-transactions?limit=3&offset=0"
-    const options = {
-    method:"GET",
-    headers :{
-        "content-type":"application/json",
-    "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
-    "x-hasura-role":"admin",
-    }}
-    const response = await fetch(url,options)
+    const url  = "/api/rest/all-transactions?limit=3&offset=0"
+    const response = await FetchAPiCalls.fetchAdminData(url)
    
     if (response.ok){
         const data = await response.json()
@@ -101,15 +87,8 @@ const geAdmintLastTransactions = async() =>{
     
 }
 const getAdminLast7daysTransactions = async() =>{
-    const url  = "https://bursting-gelding-24.hasura.app/api/rest/daywise-totals-7-days"
-    const options = {
-    method:"GET",
-    headers :{
-        "content-type":"application/json",
-    "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
-    "x-hasura-role":"admin",
-    }}
-        const response = await fetch(url,options)
+    const url  = "/api/rest/daywise-totals-7-days"
+        const response = await FetchAPiCalls.fetchAdminData(url)
         const data = await response.json()
         // const transactions = data.transactions
         // setTransactions(transactions)
