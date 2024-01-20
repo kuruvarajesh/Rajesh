@@ -9,7 +9,6 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import {useJsonPlaceHolder} from 'react-fakers'
 
 ChartJS.register(
   CategoryScale,
